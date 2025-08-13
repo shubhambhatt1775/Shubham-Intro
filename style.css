@@ -341,7 +341,7 @@ nav svg {
 
 
 
-@media (max-width:600px) {
+@media (max-width:480px) {
     #page1 {
         min-height: 73vh;
         width: 100%;
@@ -369,7 +369,7 @@ nav svg {
 
     #image-div {
         height: 45vmax;
-        width: 75vw;
+        width: 80vw;
         /* border-radius: 50%; */
         /* background-color: red; */
         overflow: hidden;
