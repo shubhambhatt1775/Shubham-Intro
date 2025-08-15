@@ -171,11 +171,27 @@ function disableContextMenu() {
 
 }
 
+var page5 = document.querySelector(".page5")
+var cursor = document.querySelector(".cursor")
+
+page5.addEventListener("mouseenter",function(){
+  cursor.style.opacity=1
+});
+page5.addEventListener("mousemove",function(dets){
+    cursor.style.left=dets.x+"px"
+    cursor.style.top=dets.y+"px"
+    
+});
+
+page5.addEventListener("mouseleave",function(){
+   cursor.style.opacity=0
+});
+
+
 var elem =document.querySelectorAll("#elem")
 
 elem.forEach(function(val){
-    console.log(val)
-
+   
     val.addEventListener("mouseenter",function(){
             val.childNodes[5].style.opacity=1
     });

@@ -1164,6 +1164,20 @@ nav svg {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
+    position: relative;
+}
+
+.page5 .cursor{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    filter: blur(5px);
+    background-color: #eb9100;
+    z-index: 100;
+    position: absolute;
+    opacity: 0;
+    transition: linear 0.02s;
+    mix-blend-mode: difference;
 }
 
 .page5 > h1 {
