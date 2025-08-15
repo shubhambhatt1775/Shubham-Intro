@@ -900,7 +900,7 @@ nav svg {
     opacity: 0;
     height: 270px;
     width: 450px;
-    object-fit:covers;
+    object-fit:cover;
     object-position: center;
     position: absolute;
     border-radius: 8px;
@@ -1123,6 +1123,19 @@ nav svg {
 
     #artworks a:hover h6 {
         color: #222;
+    }
+
+
+    #page6 img{
+        opacity: 0;
+        height: 15vmax;
+        width: 45vw;
+        object-fit:cover;
+        object-position: center;
+        position: absolute;
+        border-radius: 8px;
+        z-index: 10;
+        
     }
 
 }
