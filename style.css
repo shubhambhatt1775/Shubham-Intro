@@ -311,6 +311,22 @@ nav svg {
     flex-direction: column;
     position: relative;
 }
+  
+
+#page1 .blr{
+    width:100px;
+    height: 100px;
+    background-color: #fa5d03;
+    position: absolute;
+    z-index: 1;
+    filter: blur(45px);
+    left: 23.5%;
+    bottom:50%;
+    border-radius: 20px;
+    opacity: 0;
+
+}
+
 
 #page1 h1 {
     margin-top: 8vmax ;
@@ -324,6 +340,8 @@ nav svg {
     /* border-radius: 50%; */
     /* background-color: red; */
     overflow: hidden;
+    z-index: 10;
+    opacity: 1;
 }
 
 #image-div img {
