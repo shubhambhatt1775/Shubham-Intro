@@ -888,7 +888,6 @@ nav svg {
 
 
 
-
 #page6 {
     background-color: #222;
     min-height: 100vh;
@@ -897,12 +896,25 @@ nav svg {
     padding: 4.5vh 4.2vw;
 }
 
+#page6 img{
+    opacity: 0;
+    height: 150px;
+    width: 250px;
+    object-fit:contain;
+    object-position: center;
+    position: absolute;
+    border-radius: 8px;
+    z-index: 10;
+    
+}
+
 #page6 h1 {
     /* text-align: center; */
     font-size: 4.6vmax;
     font-family: gilroy;
     margin-top: 1vmax;
     margin-bottom: 3.5vmax;
+    /* mix-blend-mode: difference; */
 }
 
 #page6 h1 span {
@@ -952,6 +964,7 @@ nav svg {
     -o-transition: color ease-in 0.4s;
     transition: color ease-in 0.4s;
     z-index: 99;
+    
 }
 
 #artworks a h6 {
@@ -994,7 +1007,6 @@ nav svg {
 #artworks a:hover h6 {
     color: #222;
 }
-
 
 
 
