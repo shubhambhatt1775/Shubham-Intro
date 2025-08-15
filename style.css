@@ -73,6 +73,7 @@ nav > a {
     line-height: 2.4vw;
     text-decoration: none;
     width: 10vw;
+    mix-blend-mode:luminosity;
 }
 
 .resume-btn {
@@ -146,6 +147,7 @@ nav > a {
 
 .resume-btn a {
     font-size: 1.1vmax;
+    
     /* background-color: red; */
     font-family: gilroy;
     font-weight: 600;
@@ -311,13 +313,14 @@ nav svg {
 }
 
 #page1 h1 {
-    font-size: 3.7vmax;
+    margin-top: 8vmax ;
+    font-size: 5.5vmax;
     margin-bottom: 2.3vmax;
 }
 
 #image-div {
-    height: 67vmin;
-    width: 60vmax;
+    height: 60vmin;
+    width: 50vmax;
     /* border-radius: 50%; */
     /* background-color: red; */
     overflow: hidden;
@@ -327,9 +330,10 @@ nav svg {
     -o-object-fit: cover;
     object-fit: cover;
     -o-object-position: center;
-    object-position: center;
+    object-position: top;
     height: 109%;
     width: 100%;
+    border-radius:14px;
 }
 
 
@@ -370,7 +374,7 @@ nav svg {
     #image-div {
         height: 40vmax;
         width: 80vw;
-        /* border-radius: 50%; */
+        /* border-radius: 50%; *
         /* background-color: red; */
         overflow: hidden;
         margin-bottom: 2vmax;
@@ -383,7 +387,7 @@ nav svg {
         object-fit: cover;
         -o-object-position: bottom;
         object-position: bottom;
-        height: 105%;
+        height: 100%;
         width: 100%;
     }
 
