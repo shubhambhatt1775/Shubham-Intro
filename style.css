@@ -898,9 +898,9 @@ nav svg {
 
 #page6 img{
     opacity: 0;
-    height: 150px;
-    width: 250px;
-    object-fit:contain;
+    height: 270px;
+    width: 450px;
+    object-fit:covers;
     object-position: center;
     position: absolute;
     border-radius: 8px;
