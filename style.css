@@ -509,6 +509,13 @@ nav svg {
 }
 
 
+#intro-div #prof a:hover {
+  scale: 1.1;
+}
+
+
+
+
 
 
 /* ----Page2 responsive----- */
