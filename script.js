@@ -144,6 +144,13 @@ function scrollingNamediv() {
 
   })
 }
+gsap.from(".skills-icons img", {
+  scale: 0,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.1,
+  ease: "back.out(1.7)"
+});
 
 function disableContextMenu() {
   // Disable right-click
@@ -171,7 +178,7 @@ function disableContextMenu() {
 
 }
 
-var page5 = document.querySelector(".page5")
+var page5 = document.querySelector(".page7")
 var cursor = document.querySelector(".cursor")
 
 page5.addEventListener("mouseenter",function(){
