@@ -1517,8 +1517,9 @@ a {
     width:100%;
     height: 60%;       /* half-round shape */
     background: linear-gradient(180deg, #ffdb5bee, #ffa600);
+    /* background: linear-gradient(180deg, #de9c20, #fe0000); */
     filter: blur(160px);
-    border-radius: 25%;
+    border-radius: 250%;
     z-index: -1;
     opacity: 1;       /* subtle but visible */
 }
