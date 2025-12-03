@@ -232,8 +232,8 @@ document.getElementById("enquiry-form").addEventListener("submit", function(e){
 
 
 
+
 locomotiveScrollTriggerSetup()
 rotatingArrow()
 scrollingNamediv()
 disableContextMenu()
-

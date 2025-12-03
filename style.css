@@ -1502,3 +1502,51 @@ a {
     transform: translateX(-100%); /* move to left off-screen */
   }
 }
+
+
+#skills {
+    position: relative;
+    overflow: hidden;
+}
+
+.skills-bg-blur {
+    position: absolute;
+    bottom: -120px;      /* pushes half below the section */
+    left: 50%;
+    transform: translateX(-50%);
+    width:100%;
+    height: 60%;       /* half-round shape */
+    background: linear-gradient(180deg, #ffdb5bee, #ffa600);
+    filter: blur(160px);
+    border-radius: 25%;
+    z-index: -1;
+    opacity: 1;       /* subtle but visible */
+}
+
+.skills-bg-blur {
+    animation: floatGlow 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow {
+    0% { transform: translateX(-50%) translateY(0); }
+    100% { transform: translateX(-50%) translateY(10%); }
+}
+
+
+
+/* .enquiry-bg-3d1 {
+    position: absolute;
+    width: 400px;
+    height: 450px;
+    background: radial-gradient(circle at 30% 30%, #beb2b2, #000000);
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 1;
+    top: -120px;
+    left: -80px;
+    z-index: -1;
+
+    /* breathing 3D movement */
+    /* animation: floatBlob 8s ease-in-out infinite alternate;
+} */
+
