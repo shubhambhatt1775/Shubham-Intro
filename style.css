@@ -1302,9 +1302,7 @@ footer {
     /* font: normal 1.2vmax "Mont"; */
 }
 
-footer span {
-    font-family: gilroy;
-}
+
 
 .author {
     /* font-size: 4vmax; */
@@ -1316,10 +1314,7 @@ footer span {
     color: #FC626A;
 }
 
-footer > img {
-    width: 1.8vmax;
-    margin: 0 .5vmax;
-}
+
 
 #education {
   padding: 60px 5%;
@@ -1480,5 +1475,30 @@ a {
 @media (max-width: 480px) {
   #enquiry h2 {
     font-size: 2rem;
+  }
+}
+
+.ticker-footer {
+  width: 110%;
+  background: #ffd400;
+   /* yellow */color: #000;
+  overflow: hidden;
+  padding: 10px 0;
+  position: relative;
+}
+
+.ticker {
+  white-space: nowrap;
+  font-weight: 900;
+  font-size: 1.2rem;
+  animation: tickerMove 25s linear infinite;
+}
+
+@keyframes tickerMove {
+  0% {
+    transform: translateX(100%); /* start off-screen right */
+  }
+  100% {
+    transform: translateX(-100%); /* move to left off-screen */
   }
 }
