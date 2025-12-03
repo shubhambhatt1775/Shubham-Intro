@@ -1359,7 +1359,8 @@ footer > img {
 }
 
 .edu-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  color: #eac27c;
   margin-bottom: 8px;
 }
 
@@ -1417,4 +1418,67 @@ a {
     footer > img {
         width: 3vmax;
     }
+}
+
+#enquiry {
+  padding: 60px 5%;
+  text-align: center;
+}
+
+#enquiry h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+#enquiry-form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#enquiry-form input,
+#enquiry-form textarea {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #0d0d0d;
+  color: white;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+#enquiry-form input:focus,
+#enquiry-form textarea:focus {
+  border-color: white;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+#enquiry-form button {
+  padding: 12px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#enquiry-form button:hover {
+  box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+#form-status {
+  margin-top: 15px;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  #enquiry h2 {
+    font-size: 2rem;
+  }
 }

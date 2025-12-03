@@ -212,6 +212,23 @@ val.addEventListener("mousemove",function(dets){
 });
 })
 
+// EmailJS init
+emailjs.init("gDOm08i95Bwjfs1s_");
+
+// Form Submit Handler
+document.getElementById("enquiry-form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    emailjs.sendForm("service_ogydzk3", "template_5ylpwlc", this)
+    .then(() => {
+        document.getElementById("form-status").innerText = "Message sent successfully!";
+        this.reset();
+    })
+    .catch((error) => {
+        document.getElementById("form-status").innerText = "Failed to send message. Try again!";
+        console.error("Error:", error);
+    });
+});
 
 
 
