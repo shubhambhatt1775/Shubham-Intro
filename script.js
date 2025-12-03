@@ -212,6 +212,9 @@ val.addEventListener("mousemove",function(dets){
 });
 })
 
+
+
+
 locomotiveScrollTriggerSetup()
 rotatingArrow()
 scrollingNamediv()

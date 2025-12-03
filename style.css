@@ -1321,6 +1321,72 @@ footer > img {
     margin: 0 .5vmax;
 }
 
+#education {
+  padding: 60px 5%;
+  text-align: center;
+}
+
+.edu-title {
+    font-family: gilroy;
+  /* font-size: 2.5rem; */
+  font-size: 4vmax;
+  margin-bottom: 35px;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.edu-card {
+  padding: 25px;
+  background: #0d0d0d;
+  border-radius: 12px;
+  border: 1px solid #222;
+  transition: 0.3s ease;
+  text-align: left;
+
+  /* hidden for animation */
+  opacity: 1;
+  transform: translateY(30px);
+}
+
+.edu-card:hover {
+  transform: translateY(-5px);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+}
+
+.edu-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.edu-card h4 {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.edu-card .year,
+.edu-card .score {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .edu-title {
+    font-size: 2rem;
+  }
+  .edu-card {
+    padding: 20px;
+  }
+}
+
+
+
 /* ----------------- for all----------------- */
 a {
     color: inherit !important;
