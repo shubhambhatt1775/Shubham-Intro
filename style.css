@@ -387,3 +387,32 @@ body[data-portrait="photo"] .hero-left { display: none; }
 @media (max-width: 480px) { .menu li a { font-size: clamp(2.2rem, 11vw, 3.4rem); } .menu-logo { width: 46vw; } }
 
 main > section { scroll-margin-top: var(--nav-bottom, 84px); }
+
+/* ===== Desktop / laptop hero: editorial two-column layout (name left, photo right). All in normal flow, nothing overlaps. ===== */
+@media (min-width: 961px) and (min-height: 561px) {
+    body[data-portrait="photo"] .hero { grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); column-gap: clamp(16px, 3vw, 56px); align-items: end; }
+    body[data-portrait="photo"] .hero-top, body[data-portrait="photo"] .hero-bottom { grid-column: 1 / -1; }
+    body[data-portrait="photo"] .hero-top { align-self: start; }
+    body[data-portrait="photo"] .hero-bottom { align-self: end; }
+    body[data-portrait="photo"] .hero-main { grid-column: 1; grid-row: 2; align-self: center; position: relative; z-index: 2; margin: 0; padding: 0 0 clamp(8px, 4vh, 40px); text-align: left; }
+    body[data-portrait="photo"] .hero h1 { position: static; display: block; margin: 0 0 clamp(18px, 3.5vh, 36px); text-align: left; line-height: .9; letter-spacing: -.035em;
+        font-size: clamp(4rem, min(10.4vw, 18vh), 12rem); }
+    body[data-portrait="photo"] .hero h1 .n1, body[data-portrait="photo"] .hero h1 .n2 { display: block; grid-column: auto; text-align: left; }
+    body[data-portrait="photo"] .hero h1 .n2 { padding-left: .55em; color: var(--accent); }
+    body[data-portrait="photo"] .hero-sub { position: static; text-align: left; padding: 0; }
+    body[data-portrait="photo"] .hero .lead { max-width: 30em; font-size: clamp(1rem, 1.35vw, 1.3rem); }
+    body[data-portrait="photo"] .hero .cta { justify-content: flex-start; margin-top: clamp(18px, 3vh, 32px); }
+    body[data-portrait="photo"] .portrait { grid-column: 2; grid-row: 2; position: relative; top: auto; bottom: auto; left: auto; right: auto; margin: 0; justify-self: center; align-self: end;
+        width: fit-content; max-width: 100%; height: clamp(380px, calc(100vh - 230px), 820px); z-index: 1;
+        -webkit-mask-image: linear-gradient(#000 70%, transparent 99%); mask-image: linear-gradient(#000 70%, transparent 99%); }
+    body[data-portrait="photo"] .portrait img.photo-img { height: 100%; width: auto; max-width: 100%; object-fit: contain; object-position: bottom; }
+    body[data-portrait="photo"] .portrait::before { top: 8%; width: 100%; }
+}
+@media (min-width: 961px) and (min-height: 561px) {
+    body[data-portrait="photo"] .portrait::before { display: none; }
+    body[data-portrait="photo"] .hero { background:
+        radial-gradient(ellipse 34% 58% at 76% 52%, rgba(255, 106, 43, .30), rgba(255, 106, 43, .08) 55%, transparent 75%),
+        radial-gradient(ellipse 50% 60% at 10% 100%, rgba(214, 168, 79, .05), transparent 70%); }
+}
+body[data-portrait="photo"] .photo-img { filter: none; }
+@media (min-width: 961px) { .hero-bottom span:last-child { margin-right: 150px; } }
