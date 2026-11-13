@@ -67,7 +67,7 @@ h2 i { color: var(--accent); }
 .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; }
 .hero-left { position: absolute; left: var(--pad); top: 34%; z-index: 3; display: grid; gap: 14px; }
 .hero-left ul { display: grid; gap: 6px; }
-.portrait { position: absolute; left: 50%; top: 66px; transform: translateX(-50%); height: 70vh; width: auto; z-index: 1; pointer-events: none;
+.portrait { position: absolute; left: 0; right: 0; margin: 0 auto; top: 66px; height: 70vh; width: fit-content; z-index: 1; pointer-events: none;
     -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
 .portrait img { height: 100%; width: auto; max-width: none; }
 .hero-main { position: relative; z-index: 2; align-self: end; text-align: center; padding-bottom: 60px; margin-top: 56vh; }
@@ -191,3 +191,24 @@ h2 i { color: var(--accent); }
     .solid, .impact, .contact { padding: 90px 0; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .rv { opacity: 1; transform: none; } .tab-panel.on { animation: none; } }
+
+/* ===== v2: logo, splash, progress, canvases ===== */
+html.lenis { scroll-behavior: auto; }
+.loader { position: fixed; inset: 0; z-index: 200; background: #030303; display: grid; place-items: center; }
+.loader img { width: 120px; height: auto; }
+.no-motion .loader { display: none; }
+.progress { position: fixed; top: 0; left: 0; width: 100%; height: 2px; z-index: 60; }
+.progress span { display: block; width: 100%; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo { height: 34px; width: auto; }
+.menu-logo { position: absolute; right: var(--pad); bottom: 8vh; width: min(34vw, 320px); opacity: .08; pointer-events: none; }
+#portraitCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+.portrait.live img { visibility: hidden; }
+.portrait.live #portraitCanvas { display: block; }
+.wave-box { position: relative; margin: 30px auto 6px; max-width: 900px; height: clamp(180px, 28vw, 280px); border: 1px solid var(--line); border-radius: 14px; background: var(--bg); overflow: hidden; }
+#waveCanvas { width: 100%; height: 100%; display: block; }
+.wave-label { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; }
+.thread-text .tw { opacity: .18; transition: none; }
+.no-motion .thread-text .tw { opacity: 1 !important; }
+.case-img { will-change: clip-path; }
+@media (max-width: 860px) { .brand-logo { height: 28px; } .brand span { font-size: 1.4rem; } }

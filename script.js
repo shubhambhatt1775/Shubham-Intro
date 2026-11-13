@@ -1,6 +1,34 @@
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const hasGsap = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
+
+  // ---------- motion preference ----------
+  const reduceOS = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let motion = !reduceOS;
+  try { const s = localStorage.getItem("motion"); if (s !== null) motion = s === "on"; } catch (e) {}
+  if (!hasGsap) motion = false;
+  document.body.classList.toggle("no-motion", !motion);
+
+  const toggle = $("#motionToggle"), state = $("#motionState");
+  toggle.setAttribute("aria-pressed", motion);
+  state.textContent = motion ? "on" : "off";
+  toggle.addEventListener("click", () => {
+    try { localStorage.setItem("motion", motion ? "off" : "on"); } catch (e) {}
+    location.reload();
+  });
+
+  // ---------- smooth scroll (Lenis) ----------
+  let lenis = null;
+  if (motion && typeof Lenis !== "undefined") {
+    lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    gsap.registerPlugin(ScrollTrigger);
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((t) => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else if (hasGsap) {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
   // ---------- menu ----------
   const menu = $("#menu"), menuBtn = $("#menuBtn");
@@ -8,18 +36,29 @@
     menu.classList.toggle("open", open);
     menuBtn.setAttribute("aria-expanded", open);
     $("span", menuBtn).textContent = open ? "Close" : "Menu";
-    document.body.style.overflow = open ? "hidden" : "";
+    if (lenis) { open ? lenis.stop() : lenis.start(); } else { document.body.style.overflow = open ? "hidden" : ""; }
   }
   menuBtn.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
-  $$("a", menu).forEach((a) => a.addEventListener("click", () => setMenu(false)));
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
+  // anchor links (smooth via Lenis when available)
+  $$('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
+    const id = a.getAttribute("href");
+    const target = id.length > 1 ? $(id) : null;
+    if (!target) return;
+    if (a.closest("#menu")) setMenu(false);
+    if (lenis) { e.preventDefault(); lenis.scrollTo(target, { offset: -10, duration: 1.4 }); }
+  }));
+
   // ---------- tabs ----------
+  const waveLabels = { build: "Structure", automate: "Flow", ship: "Launch" };
+  let waveMode = "build";
   $$("[data-tabs]").forEach((group) => {
     const btns = $$("[data-tab]", group), panels = $$("[data-panel]", group);
     btns.forEach((b) => b.addEventListener("click", () => {
       btns.forEach((x) => { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", x === b); });
       panels.forEach((p) => p.classList.toggle("on", p.dataset.panel === b.dataset.tab));
+      if (waveLabels[b.dataset.tab]) { waveMode = b.dataset.tab; $("#waveLabel").textContent = waveLabels[waveMode]; }
     }));
   });
 
@@ -40,47 +79,196 @@
     });
   })();
 
-  // ---------- motion ----------
-  const reduceOS = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let motion = !reduceOS;
-  try { const s = localStorage.getItem("motion"); if (s !== null) motion = s === "on"; } catch (e) {}
-  const toggle = $("#motionToggle"), state = $("#motionState");
-  const hasGsap = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
-
   function showStaticCounts() { $$("[data-count]").forEach((n) => { n.textContent = n.dataset.count + (n.dataset.suffix || ""); }); }
 
-  function applyMotion() {
-    document.body.classList.toggle("no-motion", !motion);
-    toggle.setAttribute("aria-pressed", motion);
-    state.textContent = motion ? "on" : "off";
-    if (!hasGsap) { showStaticCounts(); return; }
-    if (!motion) { ScrollTrigger.getAll().forEach((t) => t.kill()); gsap.killTweensOf("*"); gsap.set(".rv, .portrait", { clearProps: "all" }); showStaticCounts(); }
+  // ---------- particle portrait (hero) ----------
+  let scrollP = 0; // 0..1 over the hero
+  function initPortrait() {
+    const wrap = $(".portrait"), img = $("img", wrap), canvas = $("#portraitCanvas"), ctx = canvas.getContext("2d");
+    const src = new Image();
+    let parts = [], W = 0, H = 0, dpr = 1, mouse = { x: -999, y: -999 }, running = true, assembled = false;
+
+    function build() {
+      const rect = wrap.getBoundingClientRect();
+      if (!rect.width) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = rect.width; H = rect.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      const step = W < 420 ? 5 : 6.5;
+      const cols = Math.floor(W / step), rows = Math.floor(H / step);
+      const off = document.createElement("canvas"); off.width = cols; off.height = rows;
+      const o = off.getContext("2d", { willReadFrequently: true });
+      o.drawImage(src, 0, 0, cols, rows);
+      let data;
+      try { data = o.getImageData(0, 0, cols, rows).data; } catch (e) { return false; }
+      parts = [];
+      for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+        const i = (y * cols + x) * 4, a = data[i + 3];
+        if (a < 128) continue;
+        const lum = data[i] / 255;
+        const r = (step / 2) * Math.sqrt(lum) * 1.05;
+        if (r < 0.45) continue;
+        const hx = (x + 0.5) * step, hy = (y + 0.5) * step;
+        parts.push({ hx, hy, x: assembled ? hx : Math.random() * W, y: assembled ? hy : H + Math.random() * H * 0.6, vx: 0, vy: 0, r, rx: Math.random() - 0.5, ry: Math.random() });
+      }
+      return true;
+    }
+
+    function frame() {
+      if (!running) return;
+      requestAnimationFrame(frame);
+      if (scrollP >= 1) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = "#f1eee8";
+      ctx.globalAlpha = Math.max(0, 1 - scrollP * 1.15);
+      ctx.beginPath();
+      const p = scrollP, mr = 80, mr2 = mr * mr;
+      for (let i = 0; i < parts.length; i++) {
+        const q = parts[i];
+        const tx = q.hx + q.rx * p * 340, ty = q.hy - (0.25 + q.ry) * p * 360;
+        q.vx += (tx - q.x) * 0.045; q.vy += (ty - q.y) * 0.045;
+        const dx = q.x - mouse.x, dy = q.y - mouse.y, d2 = dx * dx + dy * dy;
+        if (d2 < mr2) { const f = (1 - d2 / mr2) * 2.2, d = Math.sqrt(d2) || 1; q.vx += (dx / d) * f; q.vy += (dy / d) * f; }
+        q.vx *= 0.84; q.vy *= 0.84;
+        q.x += q.vx; q.y += q.vy;
+        ctx.moveTo(q.x + q.r, q.y);
+        ctx.arc(q.x, q.y, q.r, 0, 6.2832);
+      }
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    src.onload = () => {
+      if (build() === false) return; // canvas tainted (e.g. file://) -> keep static image
+      wrap.classList.add("live");
+      requestAnimationFrame(frame);
+      setTimeout(() => { assembled = true; }, 2500);
+    };
+    src.src = "images/portrait.webp";
+
+    window.addEventListener("mousemove", (e) => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    }, { passive: true });
+    window.addEventListener("mouseleave", () => { mouse.x = mouse.y = -999; });
+    let rt;
+    window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { assembled = true; build(); }, 250); });
   }
 
-  toggle.addEventListener("click", () => {
-    motion = !motion;
-    try { localStorage.setItem("motion", motion ? "on" : "off"); } catch (e) {}
-    if (motion) location.reload(); else applyMotion();
-  });
+  // ---------- dot wave (about) ----------
+  function initWave() {
+    const canvas = $("#waveCanvas"), ctx = canvas.getContext("2d");
+    let W, H, dpr, visible = false, t = 0;
+    const cur = { amp: 14, kx: 0.022, ky: 0.03, speed: 0.6, drift: 0, hot: 0 };
+    const targets = {
+      build:    { amp: 16, kx: 0.020, ky: 0.030, speed: 0.55, drift: 0,    hot: 0 },
+      automate: { amp: 24, kx: 0.045, ky: 0.012, speed: 1.6,  drift: 0,    hot: 1 },
+      ship:     { amp: 10, kx: 0.010, ky: 0.050, speed: 1.1,  drift: 1,    hot: 0 }
+    };
+    function size() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+    }
+    function draw() {
+      const tg = targets[waveMode];
+      for (const k in cur) cur[k] += (tg[k] - cur[k]) * 0.06;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      const gap = W < 500 ? 12 : 14;
+      const cols = Math.floor(W / gap), rows = Math.floor((H - 30) / gap);
+      const ox = (W - cols * gap) / 2 + gap / 2, oy = 14;
+      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+        const x = i * gap, y = j * gap;
+        let w = Math.sin(x * cur.kx + t * cur.speed) + Math.sin(y * cur.ky - t * cur.speed * 0.8 - cur.drift * t * 0.6);
+        const dy = w * cur.amp * 0.5;
+        const hot = cur.hot * Math.max(0, Math.sin(x * 0.03 - t * 2.4 + j * 0.25));
+        ctx.fillStyle = hot > 0.82 ? "rgba(255,106,43,0.95)" : "rgba(241,238,232," + (0.28 + (w + 2) * 0.11) + ")";
+        ctx.beginPath();
+        ctx.arc(ox + x, oy + y + dy, hot > 0.82 ? 1.9 : 1.3, 0, 6.2832);
+        ctx.fill();
+      }
+    }
+    function loop() { if (!visible) return; t += 0.016; draw(); requestAnimationFrame(loop); }
+    size(); draw();
+    window.addEventListener("resize", () => { size(); draw(); });
+    if (!motion) return;
+    new IntersectionObserver((en) => { const v = en[0].isIntersecting; if (v && !visible) { visible = true; loop(); } else if (!v) visible = false; }).observe(canvas);
+  }
 
-  // reveal targets
-  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .expertise, .impact-big, .impact-side > div, .thread-text, .tl, .links li, #enquiry-form, h2, .sub")
+  // ---------- reveal targets ----------
+  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
 
-  if (!motion || !hasGsap) { applyMotion(); return; }
-  applyMotion();
-  gsap.registerPlugin(ScrollTrigger);
+  initWave();
 
-  // hero intro
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-  tl.from(".portrait", { opacity: 0, scale: 1.06, duration: 1.6 })
-    .from(".hero h1", { y: 60, opacity: 0, duration: 1.1 }, "-=1.1")
-    .from(".hero .lead, .hero .cta, .hero .mono", { y: 20, opacity: 0, duration: .9, stagger: .08 }, "-=.7");
-  gsap.to(".portrait", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
 
-  // reveals
+  // ---------- scroll progress ----------
+  gsap.to(".progress span", { scaleX: 1, ease: "none", scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.2 } });
+
+  // ---------- hero scroll: particles disperse, content drifts ----------
+  ScrollTrigger.create({
+    trigger: ".hero", start: "top top", end: "bottom 15%", scrub: true,
+    onUpdate: (s) => { scrollP = s.progress; }
+  });
+  gsap.to(".hero-main", { yPercent: -35, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "70% top", scrub: true } });
+  gsap.to(".hero-top, .hero-left, .hero-bottom", { opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "10% top", end: "45% top", scrub: true } });
+  gsap.to(".portrait", { yPercent: -10, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+
+  // ---------- intro: logo splash then hero ----------
+  initPortrait();
+  const loader = $("#loader");
+  document.body.style.overflow = "hidden"; if (lenis) lenis.stop();
+  const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+  gsap.set(".hero h1, .hero .lead, .hero .cta, .hero .mono, .navigation", { opacity: 0, y: 30 });
+  intro.from(".loader img", { opacity: 0, scale: .85, duration: 1 })
+       .to(".loader img", { opacity: 0, y: -20, duration: .5, delay: .35 })
+       .to(loader, { yPercent: -100, duration: .9, ease: "power4.inOut" })
+       .add(() => { document.body.style.overflow = ""; if (lenis) lenis.start(); loader.remove(); })
+       .to(".navigation", { opacity: 1, y: 0, duration: .9 }, "-=.5")
+       .to(".hero h1", { opacity: 1, y: 0, duration: 1.2 }, "-=.8")
+       .to(".hero .lead, .hero .cta, .hero .mono", { opacity: 1, y: 0, duration: .9, stagger: .08 }, "-=.8");
+
+  // ---------- reveals ----------
   $$(".rv").forEach((el) => {
-    gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+    gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+  });
+
+  // project images: clip reveal + parallax
+  $$(".case").forEach((c) => {
+    const box = $(".case-img", c), img = $("img", box);
+    gsap.fromTo(box, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.3, ease: "power4.out", scrollTrigger: { trigger: c, start: "top 80%", once: true } });
+    if (img) gsap.fromTo(img, { yPercent: -7, scale: 1.12 }, { yPercent: 7, ease: "none", scrollTrigger: { trigger: c, start: "top bottom", end: "bottom top", scrub: true } });
+  });
+
+  // big numbers scale with scroll
+  gsap.fromTo(".impact-big b", { scale: .75, opacity: .3 }, { scale: 1, opacity: 1, ease: "none", transformOrigin: "left center", scrollTrigger: { trigger: ".impact", start: "top 80%", end: "top 25%", scrub: true } });
+  gsap.fromTo(".impact", { backgroundPosition: "0% 0%" }, { backgroundPosition: "0% 40%", ease: "none", scrollTrigger: { trigger: ".impact", start: "top bottom", end: "bottom top", scrub: true } });
+
+  // "thread" lines: words light up as you scroll
+  const thread = $(".thread-text");
+  if (thread) {
+    (function split(node) {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((w) => {
+            if (!w) return;
+            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+            const s = document.createElement("span"); s.className = "tw"; s.textContent = w; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== "BR") split(n);
+      });
+    })(thread);
+    gsap.to(".tw", { opacity: 1, stagger: .12, ease: "none", scrollTrigger: { trigger: thread, start: "top 80%", end: "bottom 45%", scrub: true } });
+  }
+
+  // timeline rows slide in with their line
+  $$(".tl").forEach((row) => {
+    gsap.from($(".yr", row), { x: -30, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: row, start: "top 85%" } });
   });
 
   // counters
@@ -89,6 +277,9 @@
     gsap.to(o, { v: end, duration: 1.8, ease: "power2.out", scrollTrigger: { trigger: n, start: "top 90%", once: true },
       onUpdate: () => { n.textContent = Math.round(o.v) + suffix; } });
   });
+
+  // menu logo gentle float
+  gsap.to(".menu-logo", { y: -14, duration: 3, ease: "sine.inOut", repeat: -1, yoyo: true });
 
   window.addEventListener("load", () => ScrollTrigger.refresh());
 })();

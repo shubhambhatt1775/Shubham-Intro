@@ -22,9 +22,15 @@
 </head>
 
 <body>
+    <!-- LOGO SPLASH -->
+    <div class="loader" id="loader" aria-hidden="true">
+        <img src="images/logo-gold.webp" alt="" width="140">
+    </div>
+    <div class="progress" aria-hidden="true"><span></span></div>
+
     <!-- NAV -->
     <header class="navigation">
-        <a href="#top" class="brand" aria-label="Shubham Bhatt — home">Shubham <i>Bhatt</i></a>
+        <a href="#top" class="brand" aria-label="Shubham Bhatt — home"><img src="images/logo-light.webp" alt="SB lion logo" class="brand-logo"><span>Shubham <i>Bhatt</i></span></a>
         <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
             <span>Menu</span><b></b>
         </button>
@@ -40,6 +46,7 @@
         </ol>
         <a class="menu-resume" target="_blank" rel="noopener noreferrer"
             href="https://drive.google.com/file/d/1MYd9hTbD8lt_QaGo_8vOaBBKqVubUpAJ/view?usp=sharing">Download resume ↗</a>
+        <img class="menu-logo" src="images/logo-gold.webp" alt="" aria-hidden="true">
     </nav>
 
     <button class="motion-toggle" id="motionToggle" aria-pressed="true">▣ Motion <span id="motionState">on</span></button>
@@ -57,6 +64,7 @@
             </div>
             <div class="portrait">
                 <img src="images/portrait-halftone.webp" alt="Portrait of Shubham Bhatt" width="836" height="900">
+                <canvas id="portraitCanvas" aria-hidden="true"></canvas>
             </div>
             <div class="hero-main">
                 <p class="mono center">A practical perspective on technology</p>
@@ -99,6 +107,10 @@
 
             <div class="wrap perspectives" data-tabs>
                 <p class="mono center">Three disciplines. One perspective.</p>
+                <div class="wave-box">
+                    <canvas id="waveCanvas" aria-hidden="true"></canvas>
+                    <span class="mono wave-label" id="waveLabel">Structure</span>
+                </div>
                 <div class="tab-list" role="tablist">
                     <button role="tab" class="on" data-tab="build" aria-selected="true">Build ↗</button>
                     <button role="tab" data-tab="automate" aria-selected="false">Automate ↗</button>
@@ -324,6 +336,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"
         integrity="sha512-tHvUcUQYi35zApvAa5TNR3fNhBQkVtkmWKfacnpxmix4/VTGz1lGjIVyLMp7gLgAvg+aKJjnVKokXJNS5GZ+/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"
+        integrity="sha384-li4UtcFCH6QeUqR4JyV58/VgTprMuz9aauj+oWtew7V4Y7ZVjnvz5px9Y3UCG0Ea" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3.12.1/dist/email.min.js"
         integrity="sha384-VDbnsk/qjpIVHPQMkJiROI+vW/7cw0k8TFYVLUabm7EWoLEDwcXh09XQ6gQ86Y0B" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
