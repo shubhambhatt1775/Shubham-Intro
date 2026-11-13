@@ -110,7 +110,7 @@
 
   // ---------- hero parallax ----------
   gsap.to(".title", { yPercent: 18, ease: "none", scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true } });
-  gsap.to(".tagline, .scroll-cue, .hero-meta, .eyebrow", { opacity: 0, ease: "none", scrollTrigger: { trigger: "#hero", start: "20% top", end: "70% top", scrub: true } });
+  gsap.fromTo(".tagline, .scroll-cue, .hero-meta, .eyebrow", { opacity: 1 }, { opacity: 0, ease: "none", immediateRender: false, scrollTrigger: { trigger: "#hero", start: "20% top", end: "70% top", scrub: true } });
 
   // ---------- word reveals ----------
   document.querySelectorAll(".split-words").forEach((el) => {

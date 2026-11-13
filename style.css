@@ -77,7 +77,11 @@ nav {
     background: linear-gradient(#000a, transparent);
 }
 .logo { font-weight: 700; font-size: 1.3rem; letter-spacing: .08em; }
-.logo span { color: var(--gold); }
+.logo img { height: 46px; width: auto; transition: transform .4s; }
+.logo:hover img { transform: scale(1.1) rotate(-3deg); }
+.loader-logo { margin: 0 auto 30px; width: 110px; height: auto; opacity: .95; }
+.hero-logo { position: absolute; right: calc(var(--pad) - 2vw); top: 14%; width: min(34vw, 480px); opacity: .16; pointer-events: none; z-index: 0; }
+#hero > *:not(.hero-logo) { position: relative; z-index: 1; }
 nav ul { display: flex; gap: clamp(14px, 2.6vw, 38px); }
 nav ul a { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); transition: color .3s; }
 nav ul a:hover { color: var(--gold2); }
@@ -120,8 +124,8 @@ nav ul a:hover { color: var(--gold2); }
 .title .ch { display: inline-block; will-change: transform; }
 .tagline { margin-top: 40px; font-size: clamp(.9rem, 1.6vw, 1.3rem); letter-spacing: .2em; text-transform: uppercase; color: var(--fg); }
 .tagline i { color: var(--gold); font-style: normal; }
-.hero-meta { position: absolute; right: var(--pad); bottom: calc(var(--bar) + 36px); display: flex; flex-direction: column; text-align: right; gap: 4px; font-size: .78rem; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
-.scroll-cue { position: absolute; left: var(--pad); bottom: calc(var(--bar) + 36px); display: flex; align-items: center; gap: 14px; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
+.hero-meta { position: absolute !important; right: var(--pad); bottom: calc(var(--bar) + 36px); display: flex; flex-direction: column; text-align: right; gap: 4px; font-size: .78rem; letter-spacing: .14em; color: var(--dim); text-transform: uppercase; }
+.scroll-cue { position: absolute !important; left: var(--pad); bottom: calc(var(--bar) + 36px); display: flex; align-items: center; gap: 14px; font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--dim); }
 .scroll-cue span { width: 1px; height: 54px; background: linear-gradient(var(--gold), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
