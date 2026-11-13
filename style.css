@@ -360,10 +360,28 @@ body[data-portrait="photo"] .hero h1 { position: absolute; z-index: 1; left: var
 body[data-portrait="photo"] .hero h1 .n1 { grid-column: 1; text-align: right; }
 body[data-portrait="photo"] .hero h1 .n2 { grid-column: 3; text-align: left; }
 body[data-portrait="photo"] .hero-sub { position: absolute; z-index: 3; left: 0; right: 0; bottom: 84px; text-align: center; padding: 0 var(--pad); }
-@media (max-width: 860px) {
-    body[data-portrait="photo"] .portrait { top: 84px; bottom: auto; height: 50vh; }
-    body[data-portrait="photo"] .hero h1 { top: calc(84px + 46vh); display: block; text-align: center; font-size: clamp(2.8rem, 13.5vw, 6rem); text-shadow: 0 0 30px #000; }
-    body[data-portrait="photo"] .hero h1 .n1, body[data-portrait="photo"] .hero h1 .n2 { text-align: center; }
-    body[data-portrait="photo"] .hero-sub { bottom: 60px; }
+/* Stacked hero for tablets, phones and short screens: normal flow, nothing absolutely positioned, so nothing can overlap */
+@media (max-width: 960px), (max-height: 560px) {
+    body[data-portrait] .hero { display: flex; flex-direction: column; align-items: center; padding: 96px var(--pad) 28px; min-height: 100vh; min-height: 100svh; }
+    body[data-portrait] .hero-top { width: 100%; justify-content: flex-start; margin-bottom: 8px; }
+    body[data-portrait] .hero-left { display: none; }
+    body[data-portrait] .portrait { position: relative; top: auto; bottom: auto; left: auto; right: auto; margin: 0 auto; flex: none; width: fit-content; max-width: 100%;
+        height: clamp(220px, 40vh, 440px); z-index: 1; }
+    body[data-portrait] .portrait img { max-width: 100%; }
+    body[data-portrait="photo"] .portrait { -webkit-mask-image: linear-gradient(#000 58%, transparent 98%); mask-image: linear-gradient(#000 58%, transparent 98%); }
+    body[data-portrait] .hero-main { position: relative; margin: 0; padding: 0; width: 100%; text-align: center; z-index: 2; align-self: auto; }
+    body[data-portrait] .hero h1 { position: static; display: block; margin: 6px 0 14px; text-align: center; font-size: clamp(2.6rem, 11.5vw, 6.5rem); line-height: 1; }
+    body[data-portrait] .hero h1 .n1, body[data-portrait] .hero h1 .n2 { text-align: center; }
+    body[data-portrait] .hero-sub { position: static; padding: 0; }
+    body[data-portrait] .lead { font-size: clamp(.95rem, 2.6vw, 1.15rem); }
+    body[data-portrait] .cta { margin-top: 20px; gap: 18px 24px; }
+    body[data-portrait] .hero-bottom { position: static; width: 100%; margin-top: auto; padding-top: 28px; }
+    body[data-portrait] .hero-bottom span:last-child { display: none; }
 }
 body[data-portrait="photo"] .hero-left { display: none; }
+
+/* motion switch: floating on desktop, inside the menu on small screens (so it never covers content) */
+.menu-motion { margin-top: 18px; align-self: flex-start; font-family: var(--mono); font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line); border-radius: 99px; padding: 10px 16px; }
+.menu-motion:hover { color: var(--fg); border-color: var(--accent); }
+@media (max-width: 860px) { .motion-toggle { display: none; } }
+@media (max-width: 480px) { .menu li a { font-size: clamp(2.2rem, 11vw, 3.4rem); } .menu-logo { width: 46vw; } }

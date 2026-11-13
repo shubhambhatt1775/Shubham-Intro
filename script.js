@@ -18,10 +18,13 @@
   const toggle = $("#motionToggle"), state = $("#motionState");
   toggle.setAttribute("aria-pressed", motion);
   state.textContent = motion ? "on" : "off";
-  toggle.addEventListener("click", () => {
+  $("#menuMotionState").textContent = motion ? "on" : "off";
+  const flipMotion = () => {
     try { localStorage.setItem("motion", motion ? "off" : "on"); } catch (e) {}
     location.reload();
-  });
+  };
+  toggle.addEventListener("click", flipMotion);
+  $("#menuMotion").addEventListener("click", flipMotion);
 
   // ---------- smooth scroll (Lenis) ----------
   let lenis = null;
