@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shubham Bhatt — Full Stack Developer</title>
-    <meta name="description" content="Shubham Bhatt — Full Stack Developer (MERN) building enterprise apps, automation and AI-enabled products.">
+    <title>Shubham Bhatt | Full Stack Developer & Automation Builder</title>
+    <meta name="description" content="Shubham Bhatt — Full Stack Developer (MERN) building enterprise apps, messaging automation and AI-enabled products.">
     <meta name="author" content="Shubham Bhatt">
     <meta name="robots" content="index, follow">
     <meta property="og:title" content="Shubham Bhatt" />
@@ -15,271 +15,308 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://shubhambhatt1775.github.io/Shubham-Intro/" />
     <link rel="icon" href="images/favicon_io/favicon-logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <!-- Film overlays -->
-    <div class="grain" aria-hidden="true"></div>
-    <div class="vignette" aria-hidden="true"></div>
-    <div class="bar bar-top" aria-hidden="true"></div>
-    <div class="bar bar-bottom" aria-hidden="true"></div>
-    <div class="cursor" aria-hidden="true"></div>
-    <div class="progress" aria-hidden="true"><span></span></div>
-
-    <!-- Loader -->
-    <div class="loader" id="loader" aria-hidden="true">
-        <div class="loader-inner">
-            <img class="loader-logo" src="images/logo-gold.webp" alt="" width="120">
-            <p class="slate">SCENE 00 &nbsp;/&nbsp; TAKE 01</p>
-            <div class="count"><span id="count">000</span><small>%</small></div>
-            <p class="slate dim">ROLLING…</p>
-        </div>
-    </div>
-
-    <nav>
-        <a href="#hero" class="logo" aria-label="Shubham Bhatt — home"><img src="images/logo-light.webp" alt="SB logo"></a>
-        <ul>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#ai">AI</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <a class="btn-resume" target="_blank" rel="noopener noreferrer"
-            href="https://drive.google.com/file/d/1MYd9hTbD8lt_QaGo_8vOaBBKqVubUpAJ/view?usp=sharing">Resume</a>
+    <!-- NAV -->
+    <header class="navigation">
+        <a href="#top" class="brand" aria-label="Shubham Bhatt — home">Shubham <i>Bhatt</i></a>
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+            <span>Menu</span><b></b>
+        </button>
+    </header>
+    <nav id="menu" class="menu" aria-label="Main">
+        <ol>
+            <li><a href="#about"><small>01</small>About</a></li>
+            <li><a href="#work"><small>02</small>Selected work</a></li>
+            <li><a href="#expertise"><small>03</small>How I work</a></li>
+            <li><a href="#impact"><small>04</small>Impact</a></li>
+            <li><a href="#journey"><small>05</small>Journey</a></li>
+            <li><a href="#contact"><small>06</small>Contact</a></li>
+        </ol>
+        <a class="menu-resume" target="_blank" rel="noopener noreferrer"
+            href="https://drive.google.com/file/d/1MYd9hTbD8lt_QaGo_8vOaBBKqVubUpAJ/view?usp=sharing">Download resume ↗</a>
     </nav>
 
+    <button class="motion-toggle" id="motionToggle" aria-pressed="true">▣ Motion <span id="motionState">on</span></button>
+
     <main>
-        <!-- SCENE 01 · HERO -->
-        <section id="hero" class="scene">
-            <img class="hero-logo" src="images/logo-gold.webp" alt="" aria-hidden="true">
-            <p class="eyebrow reveal-up">A portfolio in several scenes</p>
-            <h1 class="title" aria-label="Shubham Bhatt">
-                <span class="line"><span class="chars">SHUBHAM</span></span>
-                <span class="line"><span class="chars gold">BHATT</span></span>
-            </h1>
-            <p class="tagline reveal-up">Full Stack Developer&nbsp;<i>•</i>&nbsp;MERN&nbsp;<i>•</i>&nbsp;AI &amp; Automation</p>
-            <div class="scroll-cue reveal-up"><span></span>Scroll to begin</div>
-            <div class="hero-meta reveal-up">
-                <span>Gujarat, India</span>
-                <span>Software Developer @ VedikInSolutions</span>
+        <!-- HERO -->
+        <section id="top" class="hero">
+            <div class="hero-top">
+                <p class="mono"><i class="dot"></i> Engineer. Automator. Builder.</p>
+                <p class="mono right">Based in Gujarat, India · Thinking beyond</p>
+            </div>
+            <div class="hero-left mono">
+                <span class="accent">01 / Presence</span>
+                <ul><li>+ Full stack</li><li>Automation</li><li>AI workflows</li></ul>
+            </div>
+            <div class="portrait">
+                <img src="images/portrait-halftone.webp" alt="Portrait of Shubham Bhatt" width="836" height="900">
+            </div>
+            <div class="hero-main">
+                <p class="mono center">A practical perspective on technology</p>
+                <h1>Shubham <i>Bhatt</i></h1>
+                <p class="lead">I build full-stack products, automate business workflows,<br>and bring AI into everyday operations.</p>
+                <div class="cta">
+                    <a href="#work" class="btn pill">Explore my work ↓</a>
+                    <a href="#contact" class="btn link">Start a conversation ↗</a>
+                </div>
+            </div>
+            <div class="hero-bottom mono">
+                <span>↓ Scroll to discover</span>
+                <span>Building professionally since 2025</span>
             </div>
         </section>
 
-        <!-- SCENE 02 · ABOUT -->
-        <section id="about" class="scene">
-            <p class="scene-no">SCENE 02 — THE PROTAGONIST</p>
-            <p class="big-text split-words">
-                Full Stack Developer with professional experience in React, Node.js, Express.js, REST APIs and SQL
-                databases — building enterprise applications, messaging-based automation and
-                AI-enabled products that move real business workflows.
-            </p>
-            <div class="stats">
-                <div><b data-count="2">0</b><span>Roles — intern to full-time</span></div>
-                <div><b data-count="10">0</b><span>Projects shipped</span></div>
-                <div><b data-count="3">0</b><span>Channels automated — WhatsApp · Telegram · Email</span></div>
+        <!-- PROOF STRIP -->
+        <section class="proof">
+            <p class="mono center">Full stack · Automation · Enterprise</p>
+            <div class="proof-row">
+                <div><b data-count="10" data-suffix="+">0</b><span>projects built, from MERN apps to enterprise tools</span></div>
+                <div><b data-count="3">0</b><span>channels automated: WhatsApp, Telegram and email</span></div>
+                <div><b data-count="2">0</b><span>stages at VedikInSolutions: intern, then full-time developer</span></div>
             </div>
         </section>
 
-        <!-- SCENE 03 · EXPERIENCE -->
-        <section id="experience" class="scene">
-            <p class="scene-no">SCENE 03 — THE STORY SO FAR</p>
-            <h2 class="h2 split-words">Experience</h2>
+        <!-- ABOUT -->
+        <section id="about" class="solid">
+            <div class="wrap about-grid">
+                <div>
+                    <p class="mono accent">01 / The person behind the work</p>
+                    <h2>Code is<br>the starting point.<br><i>Workflows are the point.</i></h2>
+                </div>
+                <div class="about-copy">
+                    <p class="big">I connect engineering, automation and business.</p>
+                    <p>I'm a full-stack developer with hands-on experience in React, Node.js, Express.js, REST APIs and SQL databases. At VedikInSolutions I went from intern to full-time Software Developer, building enterprise applications, messaging-based automation and AI-enabled workflows for real clients.</p>
+                    <a class="btn link" href="#journey">Read my story ↗</a>
+                </div>
+            </div>
 
-            <div class="timeline">
-                <article class="t-item">
-                    <div class="t-date">May 2026 — Present</div>
-                    <div class="t-body">
-                        <h3>Software Developer</h3>
-                        <h4>VedikInSolutions · Gujarat, India</h4>
-                        <p class="note">Promoted to full-time after successful internship conversion.</p>
-                        <ul>
-                            <li>Full-stack applications with React, Node.js, Express.js, REST APIs, MySQL and SQLite — from frontend to deployment.</li>
-                            <li>Built a WhatsApp / Telegram PMS automation for an enterprise client: API data flow, remote attendance workflows and task tracking.</li>
-                            <li>Automated WhatsApp follow-ups, scheduled routines and IMAP email integrations.</li>
-                            <li>Integrated Agentic AI, Ollama / LLMs, OpenClaw and n8n for multi-channel operations.</li>
-                            <li>Contributed to an Order Management System — JWT authentication, RBAC, cross-department workflows.</li>
-                            <li>Git, GitHub, FileZilla and Jenkins for version control and continuous deployment.</li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="t-item">
-                    <div class="t-date">Dec 2025 — May 2026</div>
-                    <div class="t-body">
-                        <h3>Full-Stack Development Intern</h3>
-                        <h4>VedikInSolutions · Gujarat, India</h4>
-                        <ul>
-                            <li>Node.js backend services and REST API consumption for PMS workflows.</li>
-                            <li>Core automated messaging triggers, agency task-tracking modules and cron-based workflows.</li>
-                            <li>Responsive React.js UI components and form handling for internal business modules.</li>
-                        </ul>
-                    </div>
-                </article>
+            <div class="wrap perspectives" data-tabs>
+                <p class="mono center">Three disciplines. One perspective.</p>
+                <div class="tab-list" role="tablist">
+                    <button role="tab" class="on" data-tab="build" aria-selected="true">Build ↗</button>
+                    <button role="tab" data-tab="automate" aria-selected="false">Automate ↗</button>
+                    <button role="tab" data-tab="ship" aria-selected="false">Ship ↗</button>
+                </div>
+                <div class="tab-panel on" data-panel="build">
+                    <h3>Give an idea <i>structure.</i></h3>
+                    <p>React front ends, Node and Express back ends, REST APIs, JWT authentication and role-based access. Products that connect real needs to working software.</p>
+                    <a class="btn link" href="#work">Explore the products ↗</a>
+                </div>
+                <div class="tab-panel" data-panel="automate">
+                    <h3>Let the work <i>run itself.</i></h3>
+                    <p>WhatsApp and Telegram bots, scheduled cron routines, IMAP email integrations, and n8n workflows, with Agentic AI and Ollama / OpenClaw LLMs behind them.</p>
+                    <a class="btn link" href="#work">See the automation work ↗</a>
+                </div>
+                <div class="tab-panel" data-panel="ship">
+                    <h3>Get it <i>in front of people.</i></h3>
+                    <p>Git and GitHub workflows, Jenkins and FileZilla deployments, Vercel hosting, and cloud services like Cloudinary and ImageKit, from code to a live URL.</p>
+                    <a class="btn link" href="#expertise">See the toolkit ↗</a>
+                </div>
             </div>
         </section>
 
-        <!-- SCENE 04 · PROJECTS -->
-        <section id="projects" class="scene">
-            <p class="scene-no">SCENE 04 — FEATURE PRESENTATION</p>
-            <h2 class="h2 split-words">Selected Work</h2>
+        <!-- WORK -->
+        <section id="work" class="solid">
+            <div class="wrap">
+                <p class="mono accent">02 / Selected work</p>
+                <h2>Ideas are a start.<br><i>This is the work.</i></h2>
+                <p class="sub">From the platforms people book on to the workflows that run in the background. A few things I've helped bring to life.</p>
 
-            <div class="poster-list">
-                <a class="poster" target="_blank" rel="noopener noreferrer" href="https://premier-limo.vercel.app/">
-                    <div class="poster-img"><img src="./assets/image%20copy%202.png" alt="Premier Limo screenshot" loading="lazy"></div>
-                    <div class="poster-info">
-                        <span class="no">01</span>
+                <article class="case">
+                    <a class="case-img" target="_blank" rel="noopener noreferrer" href="https://premier-limo.vercel.app/">
+                        <img src="./assets/image%20copy%202.png" alt="Premier Limo screenshot" loading="lazy">
+                        <span class="url mono">premier-limo.vercel.app ↗</span>
+                    </a>
+                    <div class="case-info">
+                        <p class="mono accent">01 · Product & engineering</p>
                         <h3>Premier Limo</h3>
-                        <p class="sub">Full-Stack Luxury Car Rental Platform</p>
-                        <p>Authentication, vehicle browsing, booking, payments, invoices, profiles, reviews, notifications and real-time communication — plus an admin suite for fleet, bookings, customers, payments and analytics.</p>
-                        <div class="tags"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>JWT</span><span>Stripe</span><span>Socket.io</span><span>Leaflet</span></div>
-                        <span class="watch">Watch trailer ↗</span>
+                        <p>A full-stack luxury car rental platform: vehicle browsing, bookings, Stripe payments, invoices, reviews and real-time notifications, with an admin suite for fleet, customers and analytics.</p>
+                        <div class="tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Stripe</span><span>Socket.io</span><span>Leaflet</span></div>
+                        <a class="btn link" target="_blank" rel="noopener noreferrer" href="https://premier-limo.vercel.app/">Visit the product ↗</a>
                     </div>
-                </a>
+                </article>
 
-                <a class="poster rev" target="_blank" rel="noopener noreferrer" href="https://e-jewel-beta.vercel.app/">
-                    <div class="poster-img"><img src="./assets/Screenshot%202025-08-12%20221433.png" alt="E-Jewel screenshot" loading="lazy"></div>
-                    <div class="poster-info">
-                        <span class="no">02</span>
+                <article class="case rev">
+                    <a class="case-img" target="_blank" rel="noopener noreferrer" href="https://e-jewel-beta.vercel.app/">
+                        <img src="./assets/Screenshot%202025-08-12%20221433.png" alt="E-Jewel screenshot" loading="lazy">
+                        <span class="url mono">e-jewel-beta.vercel.app ↗</span>
+                    </a>
+                    <div class="case-info">
+                        <p class="mono accent">02 · E-commerce</p>
                         <h3>E-Jewel</h3>
-                        <p class="sub">MERN E-Commerce Platform</p>
-                        <p>Online jewellery store with product catalog, authentication, cart, order management, payments and PDF invoice generation — backed by REST APIs.</p>
-                        <div class="tags"><span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span><span>JWT</span><span>Stripe</span><span>Cloudinary</span></div>
-                        <span class="watch">Watch trailer ↗</span>
+                        <p>A MERN jewellery store with a product catalog, authentication, cart, order management, payment integration and PDF invoice generation, backed by REST APIs.</p>
+                        <div class="tags"><span>React</span><span>Express</span><span>MongoDB</span><span>Stripe</span><span>Cloudinary</span></div>
+                        <a class="btn link" target="_blank" rel="noopener noreferrer" href="https://e-jewel-beta.vercel.app/">Visit the product ↗</a>
                     </div>
-                </a>
+                </article>
 
-                <a class="poster" target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/Hypercars/">
-                    <div class="poster-img"><img src="./assets/image%20copy.png" alt="Hypercars screenshot" loading="lazy"></div>
-                    <div class="poster-info">
-                        <span class="no">03</span>
-                        <h3>Hypercars</h3>
-                        <p class="sub">Spartan Horse — Landing Experience</p>
-                        <p>A showcase site for hypercars, built with hand-written HTML, CSS and JavaScript.</p>
-                        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-                        <span class="watch">Watch trailer ↗</span>
+                <article class="case">
+                    <div class="case-img visual" aria-hidden="true">
+                        <div class="flow"><span>WhatsApp</span><i>→</i><span>API</span><i>→</i><span>Tasks</span></div>
+                        <div class="flow"><span>Telegram</span><i>→</i><span>n8n</span><i>→</i><span>LLM</span></div>
+                        <span class="url mono">Enterprise client · private</span>
                     </div>
-                </a>
-
-                <a class="poster rev" target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/School-Management-System">
-                    <div class="poster-img"><img src="./assets/OSMScroped.png" alt="Online School Admission System screenshot" loading="lazy"></div>
-                    <div class="poster-info">
-                        <span class="no">04</span>
-                        <h3>School Admission System</h3>
-                        <p class="sub">Online School Admission</p>
-                        <p>An admission workflow application built on ASP.NET with C#.</p>
-                        <div class="tags"><span>ASP.NET</span><span>C#</span><span>SQL</span></div>
-                        <span class="watch">Watch trailer ↗</span>
+                    <div class="case-info">
+                        <p class="mono accent">03 · Automation & AI</p>
+                        <h3>PMS Messaging Automation</h3>
+                        <p>A WhatsApp and Telegram based project-management automation for an enterprise client: API data flow, remote attendance workflows, task tracking, automated follow-ups and scheduled routines, with Agentic AI, Ollama and n8n behind it.</p>
+                        <div class="tags"><span>Node.js</span><span>Express</span><span>MySQL</span><span>n8n</span><span>Ollama</span><span>IMAP</span><span>Cron</span></div>
+                        <p class="mono dim">Client work, so no public link.</p>
                     </div>
-                </a>
-            </div>
+                </article>
 
-            <h3 class="more-title">More work <span>— shorts &amp; experiments</span></h3>
-            <div class="more-row">
-                <a target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/portfolio/">
-                    <img src="./assets/Screenshot%202025-08-12%20221024.png" alt="" loading="lazy">
-                    <span>Portfolio website</span><small>HTML · CSS · JS</small>
-                </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://react-mini-practice-1.vercel.app">
-                    <img src="./assets/minipractice.png" alt="" loading="lazy">
-                    <span>React Mini Practice</span><small>React JS</small>
-                </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://ochi-animeted-web-design-git-e91320-shubhambhatt1775s-projects.vercel.app">
-                    <img src="./assets/image.png" alt="" loading="lazy">
-                    <span>Animated Web Design — Ochi</span><small>React · Framer Motion</small>
-                </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://meher-plum.vercel.app/">
-                    <img src="./assets/meher_thumb.svg" alt="" loading="lazy">
-                    <span>Meher</span><small>React JS</small>
-                </a>
-                <a target="_blank" rel="noopener noreferrer"
-                    href="https://www.figma.com/proto/OLPCCTh5605ATCZMErqJn9/starbucks?node-id=44-403&p=f&t=jpn17mjQ45gweMYf-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1">
-                    <img src="./assets/MacBook%20Pro%2014_%20-%202.png" alt="" loading="lazy">
-                    <span>Re-imagined Starbucks UI</span><small>Figma</small>
-                </a>
-                <a target="_blank" rel="noopener noreferrer"
-                    href="https://www.figma.com/proto/IKnnFpMKUH2CfFlKBxM1vG/PROJECT1?node-id=1-2&t=zIBduMRkPUhL6Asn-1">
-                    <img src="./assets/Screenshot%202025-07-14%20105651.png" alt="" loading="lazy">
-                    <span>School Landing Page</span><small>Figma</small>
-                </a>
-            </div>
-        </section>
-
-        <!-- SCENE 05 · AI -->
-        <section id="ai" class="scene">
-            <p class="scene-no">SCENE 05 — THE PLOT TWIST</p>
-            <h2 class="h2 split-words">AI &amp; Automation</h2>
-            <div class="ai-grid">
-                <div class="ai-card"><h3>Agentic AI</h3><p>LLM-driven agents wired into real business operations across channels.</p></div>
-                <div class="ai-card"><h3>Ollama · OpenClaw</h3><p>Local and cloud LLMs integrated into automated multi-channel workflows.</p></div>
-                <div class="ai-card"><h3>n8n Workflows</h3><p>Scheduled routines, cron jobs and event-driven automations.</p></div>
-                <div class="ai-card"><h3>WhatsApp · Telegram · IMAP</h3><p>Messaging-based PMS automation: follow-ups, attendance and task tracking.</p></div>
-            </div>
-        </section>
-
-        <!-- SCENE 06 · SKILLS -->
-        <section id="skills" class="scene">
-            <p class="scene-no">SCENE 06 — THE TOOLKIT</p>
-            <h2 class="h2 split-words">Technical Skills</h2>
-            <div class="skill-rows">
-                <div><h3>Languages</h3><p>JavaScript, C#, SQL, Python, Java, C++</p></div>
-                <div><h3>Frontend</h3><p>React.js, HTML5, CSS3, Tailwind CSS, Vite</p></div>
-                <div><h3>Backend</h3><p>Node.js, Express.js, ASP.NET, REST APIs</p></div>
-                <div><h3>Databases</h3><p>MongoDB, MySQL, SQLite</p></div>
-                <div><h3>AI &amp; Automation</h3><p>Agentic AI, OpenClaw, Ollama, Cloud LLMs, n8n, WhatsApp, Telegram, IMAP, Cron Jobs</p></div>
-                <div><h3>DevOps &amp; Tools</h3><p>Jenkins, Git, GitHub, Vercel, FileZilla, ImageKit, Cloudinary, Socket.io, Leaflet</p></div>
-            </div>
-        </section>
-
-        <!-- SCENE 07 · EDUCATION -->
-        <section id="education" class="scene">
-            <p class="scene-no">SCENE 07 — ORIGIN STORY</p>
-            <h2 class="h2 split-words">Education</h2>
-            <div class="edu">
-                <div>
-                    <span class="yr">2024 — 2026</span>
-                    <h3>Master of Computer Applications</h3>
-                    <p>LDRP Institute of Technology &amp; Research, Gandhinagar</p>
-                    <p class="gold">8.0 CPI · 75% · First Class with Distinction</p>
-                </div>
-                <div>
-                    <span class="yr">2021 — 2024</span>
-                    <h3>Bachelor of Computer Applications</h3>
-                    <p>B.K. Mehta IT Centre, HNGU Patan</p>
-                    <p class="gold">6.97 CGPA</p>
+                <h3 class="more-h"><span class="mono accent">04 / More ways I build</span></h3>
+                <div class="more">
+                    <a target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/Hypercars/">
+                        <img src="./assets/image%20copy.png" alt="" loading="lazy">
+                        <span class="mono">Landing experience</span><h4>Hypercars</h4><small>HTML · CSS · JS</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/School-Management-System">
+                        <img src="./assets/OSMScroped.png" alt="" loading="lazy">
+                        <span class="mono">Application development</span><h4>School Admission System</h4><small>ASP.NET · C#</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://meher-plum.vercel.app/">
+                        <img src="./assets/meher_thumb.svg" alt="" loading="lazy">
+                        <span class="mono">Frontend</span><h4>Meher</h4><small>React</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://ochi-animeted-web-design-git-e91320-shubhambhatt1775s-projects.vercel.app">
+                        <img src="./assets/image.png" alt="" loading="lazy">
+                        <span class="mono">Motion design</span><h4>Ochi</h4><small>React · Framer Motion</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://react-mini-practice-1.vercel.app">
+                        <img src="./assets/minipractice.png" alt="" loading="lazy">
+                        <span class="mono">Practice</span><h4>React Mini Practice</h4><small>React</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://shubhambhatt1775.github.io/portfolio/">
+                        <img src="./assets/Screenshot%202025-08-12%20221024.png" alt="" loading="lazy">
+                        <span class="mono">Earlier site</span><h4>Previous portfolio</h4><small>HTML · CSS · JS</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.figma.com/proto/OLPCCTh5605ATCZMErqJn9/starbucks?node-id=44-403&p=f&t=jpn17mjQ45gweMYf-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1">
+                        <img src="./assets/MacBook%20Pro%2014_%20-%202.png" alt="" loading="lazy">
+                        <span class="mono">UI design</span><h4>Starbucks Re-imagined</h4><small>Figma</small>
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer"
+                        href="https://www.figma.com/proto/IKnnFpMKUH2CfFlKBxM1vG/PROJECT1?node-id=1-2&t=zIBduMRkPUhL6Asn-1">
+                        <img src="./assets/Screenshot%202025-07-14%20105651.png" alt="" loading="lazy">
+                        <span class="mono">UI design</span><h4>School Landing Page</h4><small>Figma</small>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- SCENE 08 · CONTACT / CREDITS -->
-        <section id="contact" class="scene">
-            <p class="scene-no">FINAL SCENE — CREDITS</p>
-            <h2 class="h2 big split-words">Let's make something cinematic.</h2>
+        <!-- EXPERTISE -->
+        <section id="expertise" class="solid">
+            <div class="wrap">
+                <p class="mono accent">03 / How I think & work</p>
+                <h2>How I work.<br><i>From idea to impact.</i></h2>
+                <p class="sub">Choose a discipline. Follow the thinking.</p>
 
-            <div class="contact-grid">
-                <div class="credits">
-                    <p><small>Phone</small><a href="tel:+917041612135">+91 70416 12135</a></p>
-                    <p><small>Email</small><a href="mailto:bhattshubham274@gmail.com">bhattshubham274@gmail.com</a></p>
-                    <p><small>LinkedIn</small><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/shubham-bhatt-761170316/">shubham-bhatt</a></p>
-                    <p><small>GitHub</small><a target="_blank" rel="noopener noreferrer" href="https://github.com/shubhambhatt1775">shubhambhatt1775</a></p>
-                    <p><small>Instagram</small><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/shubhambhatt1775/">@shubhambhatt1775</a></p>
-                    <p><small>Location</small><span>Gujarat, India</span></p>
+                <div class="expertise" data-tabs>
+                    <div class="tab-list vertical" role="tablist">
+                        <button role="tab" class="on" data-tab="eng" aria-selected="true"><small>01</small>Product & engineering</button>
+                        <button role="tab" data-tab="auto" aria-selected="false"><small>02</small>Automation & AI</button>
+                        <button role="tab" data-tab="ops" aria-selected="false"><small>03</small>Delivery & tools</button>
+                    </div>
+                    <div class="expertise-body">
+                        <div class="tab-panel on" data-panel="eng">
+                            <ol class="steps"><li>Understand the need</li><li>Shape the experience</li><li>Build the product</li></ol>
+                            <h3>Build with <i>perspective.</i></h3>
+                            <p>I connect what users need with what the technology can do, from the first requirement to the interface people use.</p>
+                            <p class="stack"><b>Languages</b> JavaScript, C#, SQL, Python, Java, C++<br><b>Frontend</b> React.js, HTML5, CSS3, Tailwind CSS, Vite<br><b>Backend</b> Node.js, Express.js, ASP.NET, REST APIs<br><b>Databases</b> MongoDB, MySQL, SQLite</p>
+                        </div>
+                        <div class="tab-panel" data-panel="auto">
+                            <ol class="steps"><li>Map the workflow</li><li>Connect the channels</li><li>Let it run</li></ol>
+                            <h3>Make routine work <i>disappear.</i></h3>
+                            <p>Messaging-first automation that meets people where they already work, with AI and schedules doing the repetitive parts.</p>
+                            <p class="stack"><b>AI</b> Agentic AI, OpenClaw, Ollama, Cloud LLMs<br><b>Workflows</b> n8n, Cron jobs, scheduled routines<br><b>Channels</b> WhatsApp, Telegram, IMAP email</p>
+                        </div>
+                        <div class="tab-panel" data-panel="ops">
+                            <ol class="steps"><li>Version it</li><li>Deploy it</li><li>Keep it running</li></ol>
+                            <h3>Ship it <i>properly.</i></h3>
+                            <p>Reliable delivery with version control, continuous deployment and the right services around the code.</p>
+                            <p class="stack"><b>DevOps</b> Jenkins, Git, GitHub, Vercel, FileZilla<br><b>Services</b> ImageKit, Cloudinary, Socket.io, Leaflet<br><b>Security</b> JWT authentication, RBAC</p>
+                        </div>
+                    </div>
                 </div>
-
-                <form id="enquiry-form">
-                    <input type="text" name="user_name" placeholder="Your name" required>
-                    <input type="email" name="user_email" placeholder="Your email" required>
-                    <textarea name="message" placeholder="Your message" rows="5" required></textarea>
-                    <button type="submit">Send message</button>
-                    <p id="form-status" role="status" aria-live="polite"></p>
-                </form>
             </div>
+        </section>
 
-            <footer>
-                <p>© 2026 Shubham Bhatt · Directed, designed &amp; developed by me.</p>
-            </footer>
+        <!-- IMPACT -->
+        <section id="impact" class="impact">
+            <div class="wrap">
+                <p class="mono accent">04 / The work, multiplied</p>
+                <h2>Reach is a number.<br><i>Impact is practical.</i></h2>
+                <div class="impact-grid">
+                    <div class="impact-big">
+                        <b data-count="3">0</b>
+                        <p class="lead2">Channels automated.<br>Hours handed back.</p>
+                        <p>WhatsApp, Telegram and email workflows for follow-ups, attendance and task tracking, built for an enterprise client.</p>
+                    </div>
+                    <div class="impact-side">
+                        <div><b>JWT + RBAC</b><p>Secure, role-based workflows across departments in an Order Management System.</p></div>
+                        <div><b>Intern → Dev</b><p>Converted from internship to full-time Software Developer in May 2026.</p></div>
+                    </div>
+                </div>
+                <p class="thread mono">The common thread</p>
+                <p class="thread-text">Build something useful.<br>Make it run on its own.<br><i>Give it room to grow.</i></p>
+            </div>
+        </section>
+
+        <!-- JOURNEY -->
+        <section id="journey" class="solid">
+            <div class="wrap">
+                <p class="mono accent">05 / Still becoming</p>
+                <h2>Started with code.<br><i>Kept asking why.</i></h2>
+                <div class="timeline">
+                    <div class="tl"><span class="yr">2021</span><div><h3>Learning by building.</h3><p>Began my BCA at B.K. Mehta IT Centre, HNGU Patan, and started building with web technologies. Graduated in 2024 with a 6.97 CGPA.</p></div></div>
+                    <div class="tl"><span class="yr">2024</span><div><h3>Going deeper.</h3><p>Started my MCA at LDRP Institute of Technology & Research, Gandhinagar. Completed it in 2026 with 8.0 CPI, 75%, First Class with Distinction.</p></div></div>
+                    <div class="tl"><span class="yr">Dec 2025</span><div><h3>First real team.</h3><p>Joined VedikInSolutions as a Full-Stack Development Intern: Node.js services, messaging triggers and React UI components.</p></div></div>
+                    <div class="tl"><span class="yr">May 2026</span><div><h3>Full-time developer.</h3><p>Promoted to Software Developer. Building PMS automation, an Order Management System and AI-enabled workflows.</p></div></div>
+                    <div class="tl"><span class="yr">Next</span><div><h3>More useful things.</h3><p>Working with ambitious teams to build products and automations that open new possibilities.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="contact">
+            <div class="wrap">
+                <p class="mono accent">06 / The next chapter</p>
+                <h2>Something great<br>starts with <i>a hello.</i></h2>
+                <p class="sub">Products, automation, freelance work, full-time roles. If our worlds overlap, I'd love to hear from you.</p>
+
+                <div class="contact-grid">
+                    <ul class="links">
+                        <li><small class="mono">Phone</small><a href="tel:+917041612135">+91 70416 12135</a></li>
+                        <li><small class="mono">Email</small><a href="mailto:bhattshubham274@gmail.com">bhattshubham274@gmail.com</a></li>
+                        <li><small class="mono">LinkedIn</small><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/shubham-bhatt-761170316/">shubham-bhatt ↗</a></li>
+                        <li><small class="mono">GitHub</small><a target="_blank" rel="noopener noreferrer" href="https://github.com/shubhambhatt1775">shubhambhatt1775 ↗</a></li>
+                        <li><small class="mono">Instagram</small><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/shubhambhatt1775/">@shubhambhatt1775 ↗</a></li>
+                    </ul>
+                    <form id="enquiry-form">
+                        <input type="text" name="user_name" placeholder="Your name" required>
+                        <input type="email" name="user_email" placeholder="Your email" required>
+                        <textarea name="message" placeholder="Your message" rows="4" required></textarea>
+                        <button type="submit" class="btn pill">Send message →</button>
+                        <p id="form-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
+
+    <footer class="foot">
+        <img src="images/logo-light.webp" alt="SB lion logo" width="44">
+        <p class="mono">© 2026 Shubham Bhatt · Built with intent. Always evolving.</p>
+        <p class="mono">Gujarat, India ↗ The world</p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
         integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
