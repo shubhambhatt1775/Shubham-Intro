@@ -107,26 +107,40 @@
 
             <div class="wrap perspectives" data-tabs>
                 <p class="mono center">Three disciplines. One perspective.</p>
-                <div class="wave-box">
-                    <canvas id="waveCanvas" aria-hidden="true"></canvas>
-                    <span class="mono wave-label" id="waveLabel">Structure</span>
-                </div>
                 <div class="tab-list" role="tablist">
                     <button role="tab" class="on" data-tab="build" aria-selected="true">Build ↗</button>
                     <button role="tab" data-tab="automate" aria-selected="false">Automate ↗</button>
                     <button role="tab" data-tab="ship" aria-selected="false">Ship ↗</button>
                 </div>
                 <div class="tab-panel on" data-panel="build">
+                    <div class="diagram" aria-hidden="true">
+                        <p class="mono diag-title">Request flow · full-stack app</p>
+                        <div class="flow-row"><div class="node"><b>Client</b><small>React · Vite · Tailwind</small></div><span class="wire"><i></i></span><div class="node"><b>API</b><small>Node · Express · JWT</small></div><span class="wire"><i></i></span><div class="node"><b>Database</b><small>MongoDB · MySQL · SQLite</small></div></div>
+                        <div class="chips"><span>Stripe</span><span>Socket.io</span><span>Cloudinary</span><span>ImageKit</span><span>Leaflet</span></div>
+                        <ul class="log"><li><em>POST</em> /api/bookings → 201 Created</li><li><em>GET</em> /api/vehicles → 200 OK</li><li><em>AUTH</em> JWT verified · role: admin</li></ul>
+                    </div>
                     <h3>Give an idea <i>structure.</i></h3>
                     <p>React front ends, Node and Express back ends, REST APIs, JWT authentication and role-based access. Products that connect real needs to working software.</p>
                     <a class="btn link" href="#work">Explore the products ↗</a>
                 </div>
                 <div class="tab-panel" data-panel="automate">
+                    <div class="diagram" aria-hidden="true">
+                        <p class="mono diag-title">Automation flow · messaging-based PMS</p>
+                        <div class="flow-row"><div class="node"><b>Message</b><small>WhatsApp · Telegram</small></div><span class="wire"><i></i></span><div class="node"><b>Workflow</b><small>n8n · Cron jobs</small></div><span class="wire"><i></i></span><div class="node"><b>AI agent</b><small>Ollama · OpenClaw · LLMs</small></div><span class="wire"><i></i></span><div class="node"><b>Action</b><small>Tasks · Email · IMAP</small></div></div>
+                        
+                        <ul class="log"><li><em>IN</em> attendance update received on WhatsApp</li><li><em>AI</em> intent detected → task updated</li><li><em>OUT</em> follow-up sent · email logged</li></ul>
+                    </div>
                     <h3>Let the work <i>run itself.</i></h3>
                     <p>WhatsApp and Telegram bots, scheduled cron routines, IMAP email integrations, and n8n workflows, with Agentic AI and Ollama / OpenClaw LLMs behind them.</p>
                     <a class="btn link" href="#work">See the automation work ↗</a>
                 </div>
                 <div class="tab-panel" data-panel="ship">
+                    <div class="diagram" aria-hidden="true">
+                        <p class="mono diag-title">Delivery pipeline · code to live URL</p>
+                        <div class="flow-row"><div class="node"><b>Commit</b><small>Git</small></div><span class="wire"><i></i></span><div class="node"><b>Repository</b><small>GitHub</small></div><span class="wire"><i></i></span><div class="node"><b>Pipeline</b><small>Jenkins</small></div><span class="wire"><i></i></span><div class="node"><b>Deploy</b><small>Vercel · FileZilla</small></div><span class="wire"><i></i></span><div class="node"><b>Live</b><small>Production</small></div></div>
+                        
+                        <ul class="log"><li><em>PUSH</em> main ← feature/orders</li><li><em>BUILD</em> jenkins · tests passed</li><li><em>DEPLOY</em> release live ✓</li></ul>
+                    </div>
                     <h3>Get it <i>in front of people.</i></h3>
                     <p>Git and GitHub workflows, Jenkins and FileZilla deployments, Vercel hosting, and cloud services like Cloudinary and ImageKit, from code to a live URL.</p>
                     <a class="btn link" href="#expertise">See the toolkit ↗</a>

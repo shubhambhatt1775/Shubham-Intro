@@ -205,10 +205,40 @@ html.lenis { scroll-behavior: auto; }
 #portraitCanvas { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
 .portrait.live img { visibility: hidden; }
 .portrait.live #portraitCanvas { display: block; }
-.wave-box { position: relative; margin: 30px auto 6px; max-width: 900px; height: clamp(180px, 28vw, 280px); border: 1px solid var(--line); border-radius: 14px; background: var(--bg); overflow: hidden; }
-#waveCanvas { width: 100%; height: 100%; display: block; }
-.wave-label { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; }
 .thread-text .tw { opacity: .18; transition: none; }
 .no-motion .thread-text .tw { opacity: 1 !important; }
 .case-img { will-change: clip-path; }
 @media (max-width: 860px) { .brand-logo { height: 28px; } .brand span { font-size: 1.4rem; } }
+
+/* ===== workflow diagrams ===== */
+.diagram { max-width: 960px; margin: 0 auto 40px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); padding: 26px clamp(16px, 3vw, 34px) 22px; text-align: left; }
+.diag-title { margin-bottom: 26px; }
+.flow-row { display: flex; align-items: center; }
+.node { flex: 0 0 auto; min-width: 128px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255, 255, 255, .03); text-align: center; }
+.node b { display: block; font-family: var(--serif); font-weight: 400; font-size: 1.5rem; line-height: 1.1; }
+.node small { display: block; margin-top: 6px; font-family: var(--mono); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); line-height: 1.5; }
+.wire { position: relative; flex: 1 1 24px; height: 1px; background: var(--line); min-width: 24px; }
+.wire i { position: absolute; top: -3px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: packet 2s linear infinite; }
+.wire:nth-of-type(2) i { animation-delay: .5s; }
+.wire:nth-of-type(3) i { animation-delay: 1s; }
+.wire:nth-of-type(4) i { animation-delay: 1.5s; }
+@keyframes packet { 0% { left: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.chips span { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; border: 1px dashed var(--line); border-radius: 99px; padding: 6px 12px; color: var(--dim); }
+.log { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 6px; font-family: var(--mono); font-size: .74rem; color: var(--dim); }
+.log li { opacity: .35; animation: logline 6s infinite; }
+.log li:nth-child(2) { animation-delay: 2s; }
+.log li:nth-child(3) { animation-delay: 4s; }
+.log em { font-style: normal; color: var(--accent); margin-right: 8px; }
+@keyframes logline { 0%, 4% { opacity: .35; } 8%, 30% { opacity: 1; } 36%, 100% { opacity: .35; } }
+.no-motion .wire i, .no-motion .log li { animation: none; }
+.no-motion .wire i { left: 50%; }
+.no-motion .log li { opacity: 1; }
+@media (max-width: 860px) {
+    .flow-row { flex-direction: column; align-items: stretch; }
+    .node { min-width: 0; }
+    .wire { width: 1px; min-width: 0; height: 30px; flex: 0 0 30px; align-self: center; }
+    .wire i { top: 0; left: -3px; animation-name: packet-v; }
+    @keyframes packet-v { 0% { top: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: calc(100% - 7px); opacity: 0; } }
+}
+@media (prefers-reduced-motion: reduce) { .wire i, .log li { animation: none; } .log li { opacity: 1; } }

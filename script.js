@@ -51,14 +51,11 @@
   }));
 
   // ---------- tabs ----------
-  const waveLabels = { build: "Structure", automate: "Flow", ship: "Launch" };
-  let waveMode = "build";
   $$("[data-tabs]").forEach((group) => {
     const btns = $$("[data-tab]", group), panels = $$("[data-panel]", group);
     btns.forEach((b) => b.addEventListener("click", () => {
       btns.forEach((x) => { x.classList.toggle("on", x === b); x.setAttribute("aria-selected", x === b); });
       panels.forEach((p) => p.classList.toggle("on", p.dataset.panel === b.dataset.tab));
-      if (waveLabels[b.dataset.tab]) { waveMode = b.dataset.tab; $("#waveLabel").textContent = waveLabels[waveMode]; }
     }));
   });
 
@@ -156,52 +153,9 @@
     window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { assembled = true; build(); }, 250); });
   }
 
-  // ---------- dot wave (about) ----------
-  function initWave() {
-    const canvas = $("#waveCanvas"), ctx = canvas.getContext("2d");
-    let W, H, dpr, visible = false, t = 0;
-    const cur = { amp: 14, kx: 0.022, ky: 0.03, speed: 0.6, drift: 0, hot: 0 };
-    const targets = {
-      build:    { amp: 16, kx: 0.020, ky: 0.030, speed: 0.55, drift: 0,    hot: 0 },
-      automate: { amp: 24, kx: 0.045, ky: 0.012, speed: 1.6,  drift: 0,    hot: 1 },
-      ship:     { amp: 10, kx: 0.010, ky: 0.050, speed: 1.1,  drift: 1,    hot: 0 }
-    };
-    function size() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const r = canvas.getBoundingClientRect(); W = r.width; H = r.height;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-    }
-    function draw() {
-      const tg = targets[waveMode];
-      for (const k in cur) cur[k] += (tg[k] - cur[k]) * 0.06;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, W, H);
-      const gap = W < 500 ? 12 : 14;
-      const cols = Math.floor(W / gap), rows = Math.floor((H - 30) / gap);
-      const ox = (W - cols * gap) / 2 + gap / 2, oy = 14;
-      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
-        const x = i * gap, y = j * gap;
-        let w = Math.sin(x * cur.kx + t * cur.speed) + Math.sin(y * cur.ky - t * cur.speed * 0.8 - cur.drift * t * 0.6);
-        const dy = w * cur.amp * 0.5;
-        const hot = cur.hot * Math.max(0, Math.sin(x * 0.03 - t * 2.4 + j * 0.25));
-        ctx.fillStyle = hot > 0.82 ? "rgba(255,106,43,0.95)" : "rgba(241,238,232," + (0.28 + (w + 2) * 0.11) + ")";
-        ctx.beginPath();
-        ctx.arc(ox + x, oy + y + dy, hot > 0.82 ? 1.9 : 1.3, 0, 6.2832);
-        ctx.fill();
-      }
-    }
-    function loop() { if (!visible) return; t += 0.016; draw(); requestAnimationFrame(loop); }
-    size(); draw();
-    window.addEventListener("resize", () => { size(); draw(); });
-    if (!motion) return;
-    new IntersectionObserver((en) => { const v = en[0].isIntersecting; if (v && !visible) { visible = true; loop(); } else if (!v) visible = false; }).observe(canvas);
-  }
-
   // ---------- reveal targets ----------
   $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
-
-  initWave();
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
 
