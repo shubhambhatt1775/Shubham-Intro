@@ -3,6 +3,11 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const hasGsap = typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined";
 
+  // ---------- portrait mode: photo (default) or dots (?portrait=dots) ----------
+  let pmode = "photo";
+  try { if (new URLSearchParams(location.search).get("portrait") === "dots") pmode = "dots"; } catch (e) {}
+  document.body.dataset.portrait = pmode;
+
   // ---------- motion preference ----------
   const reduceOS = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let motion = !reduceOS;
@@ -153,6 +158,18 @@
     window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { assembled = true; build(); }, 250); });
   }
 
+  // ---------- photo portrait: mouse parallax + names slide apart on scroll ----------
+  function initPhotoPortrait() {
+    if (!window.matchMedia("(hover: hover)").matches) return;
+    const photo = $(".photo-img"), n1 = $(".hero h1 .n1"), n2 = $(".hero h1 .n2");
+    const px = gsap.quickTo(photo, "x", { duration: 1.2, ease: "power3" }), py = gsap.quickTo(photo, "y", { duration: 1.2, ease: "power3" });
+    const ax = gsap.quickTo(n1, "x", { duration: 1.4, ease: "power3" }), bx = gsap.quickTo(n2, "x", { duration: 1.4, ease: "power3" });
+    window.addEventListener("mousemove", (e) => {
+      const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5;
+      px(nx * -18); py(ny * -10); ax(nx * 26); bx(nx * 26);
+    }, { passive: true });
+  }
+
   // ---------- reveal targets ----------
   $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
@@ -167,12 +184,17 @@
     trigger: ".hero", start: "top top", end: "bottom 15%", scrub: true,
     onUpdate: (s) => { scrollP = s.progress; }
   });
-  gsap.to(".hero-main", { yPercent: -35, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "70% top", scrub: true } });
+  gsap.to(pmode === "photo" ? ".hero-sub" : ".hero-main", { yPercent: -35, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "70% top", scrub: true } });
   gsap.to(".hero-top, .hero-left, .hero-bottom", { opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "10% top", end: "45% top", scrub: true } });
+  if (pmode === "photo") {
+    gsap.to(".hero h1 .n1", { xPercent: -18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+    gsap.to(".hero h1 .n2", { xPercent: 18, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  }
   gsap.to(".portrait", { yPercent: -10, scale: 1.08, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
   // ---------- intro: logo splash then hero ----------
-  initPortrait();
+  if (pmode === "dots") initPortrait();
+  else initPhotoPortrait();
   const loader = $("#loader");
   document.body.style.overflow = "hidden"; if (lenis) lenis.stop();
   const intro = gsap.timeline({ defaults: { ease: "power3.out" } });

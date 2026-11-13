@@ -344,3 +344,26 @@ html.lenis { scroll-behavior: auto; }
 .fl-note span { color: var(--dim); font-size: .9rem; }
 .fl-foot { margin-top: 36px; text-transform: none; letter-spacing: .04em; max-width: 70ch; }
 @media (max-width: 860px) { .fl-price li { flex-direction: column; gap: 2px; } .fl-price li b { text-align: left; } }
+
+/* ===== portrait modes: photo (default) / dots (?portrait=dots) ===== */
+body[data-portrait="dots"] .photo-img { display: none; }
+body[data-portrait="photo"] .dots-img, body[data-portrait="photo"] #portraitCanvas { display: none !important; }
+.photo-img { height: 100%; width: auto; max-width: none; filter: drop-shadow(0 0 50px rgba(255, 106, 43, .16)); }
+body[data-portrait="photo"] .portrait { top: auto; bottom: 0; height: 88vh; z-index: 2;
+    -webkit-mask-image: linear-gradient(#000 42%, transparent 78%); mask-image: linear-gradient(#000 42%, transparent 78%); }
+body[data-portrait="photo"] .portrait::before { content: ""; position: absolute; left: 50%; top: 4%; width: 90%; aspect-ratio: 1; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255, 106, 43, .30), rgba(255, 106, 43, .08) 45%, transparent 66%); z-index: -1; }
+body[data-portrait="photo"] .hero-main { position: static; margin-top: 0; padding-bottom: 0; z-index: auto; }
+body[data-portrait="photo"] .hero-main > .mono { display: none; }
+body[data-portrait="photo"] .hero h1 { position: absolute; z-index: 1; left: var(--pad); right: var(--pad); top: 27vh; margin: 0; line-height: 1; text-shadow: none;
+    display: grid; grid-template-columns: 1fr clamp(190px, 21vw, 340px) 1fr; font-size: clamp(3rem, 9.6vw, 10rem); }
+body[data-portrait="photo"] .hero h1 .n1 { grid-column: 1; text-align: right; }
+body[data-portrait="photo"] .hero h1 .n2 { grid-column: 3; text-align: left; }
+body[data-portrait="photo"] .hero-sub { position: absolute; z-index: 3; left: 0; right: 0; bottom: 84px; text-align: center; padding: 0 var(--pad); }
+@media (max-width: 860px) {
+    body[data-portrait="photo"] .portrait { top: 84px; bottom: auto; height: 50vh; }
+    body[data-portrait="photo"] .hero h1 { top: calc(84px + 46vh); display: block; text-align: center; font-size: clamp(2.8rem, 13.5vw, 6rem); text-shadow: 0 0 30px #000; }
+    body[data-portrait="photo"] .hero h1 .n1, body[data-portrait="photo"] .hero h1 .n2 { text-align: center; }
+    body[data-portrait="photo"] .hero-sub { bottom: 60px; }
+}
+body[data-portrait="photo"] .hero-left { display: none; }
