@@ -428,3 +428,16 @@ body[data-portrait="photo"] .photo-img { filter: none; }
     body[data-portrait="photo"] .hero h1 { font-size: clamp(4rem, min(10vw, 18vh), 11.5rem); }
     body[data-portrait="photo"] .hero .hero-main::before { content: ""; display: block; width: 56px; height: 2px; background: var(--accent); margin-bottom: clamp(16px, 3vh, 30px); }
 }
+
+/* ===== animated faded logo behind the About section ===== */
+#about { position: relative; overflow: clip; }
+#about > .wrap { position: relative; z-index: 1; }
+.bg-logo { position: absolute; z-index: 0; right: clamp(-40px, 3vw, 80px); top: 70px; width: min(44vw, 560px); aspect-ratio: 1; pointer-events: none;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 28%, transparent 70%); mask-image: radial-gradient(circle at 50% 50%, #000 28%, transparent 70%); }
+.bg-logo::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 106, 43, .22), transparent 68%); animation: logo-glow 6s ease-in-out infinite; }
+.bg-logo img { position: relative; width: 100%; height: 100%; object-fit: contain; opacity: .13; animation: logo-float 9s ease-in-out infinite; }
+@keyframes logo-float { 0%, 100% { transform: translateY(-12px) rotate(-1.5deg) scale(1); opacity: .09; } 50% { transform: translateY(14px) rotate(1.5deg) scale(1.04); opacity: .17; } }
+@keyframes logo-glow { 0%, 100% { opacity: .35; transform: scale(.92); } 50% { opacity: .9; transform: scale(1.08); } }
+.no-motion .bg-logo img, .no-motion .bg-logo::before { animation: none; }
+@media (prefers-reduced-motion: reduce) { .bg-logo img, .bg-logo::before { animation: none; } }
+@media (max-width: 860px) { .bg-logo { width: 88vw; right: -22vw; top: 40px; } .bg-logo img { opacity: .1; } }

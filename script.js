@@ -229,6 +229,9 @@
     });
   });
 
+  // faded logo drifts slowly as the About section scrolls past
+  gsap.fromTo(".bg-logo", { yPercent: -6 }, { yPercent: 28, ease: "none", scrollTrigger: { trigger: "#about", start: "top bottom", end: "bottom top", scrub: true } });
+
   // ---------- scroll progress ----------
   gsap.to(".progress span", { scaleX: 1, ease: "none", scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.2 } });
 
