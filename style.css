@@ -441,3 +441,16 @@ body[data-portrait="photo"] .photo-img { filter: none; }
 .no-motion .bg-logo img, .no-motion .bg-logo::before { animation: none; }
 @media (prefers-reduced-motion: reduce) { .bg-logo img, .bg-logo::before { animation: none; } }
 @media (max-width: 860px) { .bg-logo { width: 88vw; right: -22vw; top: 40px; } .bg-logo img { opacity: .1; } }
+
+/* ===== animated faded logo behind the hero (landing page) ===== */
+.hero > .bg-logo { position: absolute; z-index: 0; left: clamp(6%, 14vw, 22%); top: 0; bottom: 0; margin: auto 0; width: min(40vw, 540px); height: min(40vw, 540px); right: auto; }
+body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
+.hero > .bg-logo img { opacity: .12; }
+@media (max-width: 960px), (max-height: 560px) {
+    .hero > .bg-logo, body[data-portrait] .hero > .bg-logo { left: 0; right: 0; margin: 0 auto; top: 70px; bottom: auto; width: min(86vw, 460px); height: min(86vw, 460px); }
+    .hero > .bg-logo img { opacity: .09; }
+}
+@media (min-width: 961px) and (min-height: 561px) {
+    .hero > .bg-logo, body[data-portrait] .hero > .bg-logo { left: 27%; width: min(42vw, 600px); height: min(42vw, 600px); }
+    .hero > .bg-logo img { opacity: .16; }
+}
