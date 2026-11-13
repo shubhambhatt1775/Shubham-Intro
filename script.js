@@ -26,6 +26,13 @@
   toggle.addEventListener("click", flipMotion);
   $("#menuMotion").addEventListener("click", flipMotion);
 
+  // ---------- navbar offset: sections align just below the floating navbar ----------
+  const navEl = $(".navigation");
+  const navBottom = () => 14 + navEl.offsetHeight + 6;
+  const setNavVar = () => document.documentElement.style.setProperty("--nav-bottom", navBottom() + "px");
+  setNavVar();
+  window.addEventListener("resize", setNavVar);
+
   // ---------- smooth scroll (Lenis) ----------
   let lenis = null;
   if (motion && typeof Lenis !== "undefined") {
@@ -55,7 +62,7 @@
     const target = id.length > 1 ? $(id) : null;
     if (!target) return;
     if (a.closest("#menu")) setMenu(false);
-    if (lenis) { e.preventDefault(); lenis.scrollTo(target, { offset: -10, duration: 1.4 }); }
+    if (lenis) { e.preventDefault(); lenis.scrollTo(target, { offset: -navBottom(), duration: 1.4 }); }
   }));
 
   // ---------- tabs ----------
@@ -178,6 +185,35 @@
     .forEach((el) => el.classList.add("rv"));
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
+
+  // ---------- section snapping: the next section's top meets the bottom of the navbar ----------
+  const sections = $$("main > section");
+  const touch = window.matchMedia("(hover: none)").matches;
+  let snapTimer = null, snapping = false;
+  function snapPoints() {
+    const maxY = document.documentElement.scrollHeight - innerHeight;
+    return sections.map((s, i) => i === 0 ? 0 : Math.min(maxY, Math.max(0, Math.round(s.getBoundingClientRect().top + window.scrollY - navBottom()))));
+  }
+  function doSnap() {
+    if (!lenis || snapping || menu.classList.contains("open")) return;
+    const y = window.scrollY, thr = innerHeight * (touch ? 0.16 : 0.3);
+    let best = null, bestD = Infinity;
+    snapPoints().forEach((p) => { const d = Math.abs(p - y); if (d < bestD) { bestD = d; best = p; } });
+    if (best === null || bestD < 3 || bestD > thr) return;
+    snapping = true;
+    lenis.scrollTo(best, { duration: 0.85, easing: (t) => 1 - Math.pow(1 - t, 3), onComplete: () => { snapping = false; } });
+    setTimeout(() => { snapping = false; }, 1400);
+  }
+  if (lenis) lenis.on("scroll", () => { clearTimeout(snapTimer); if (!snapping) snapTimer = setTimeout(doSnap, 170); });
+
+  // ---------- section exit effect: each section settles back as the next one slides up ----------
+  sections.forEach((s, i) => {
+    if (i === sections.length - 1) return;
+    gsap.fromTo(s, { scale: 1, opacity: 1, transformOrigin: "50% 100%" }, {
+      scale: 0.95, opacity: 0.3, ease: "none", immediateRender: false,
+      scrollTrigger: { trigger: s, start: () => "bottom " + Math.round(innerHeight * 0.75), end: () => "bottom top+=" + navBottom(), scrub: true, invalidateOnRefresh: true }
+    });
+  });
 
   // ---------- scroll progress ----------
   gsap.to(".progress span", { scaleX: 1, ease: "none", scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: 0.2 } });

@@ -385,3 +385,5 @@ body[data-portrait="photo"] .hero-left { display: none; }
 .menu-motion:hover { color: var(--fg); border-color: var(--accent); }
 @media (max-width: 860px) { .motion-toggle { display: none; } }
 @media (max-width: 480px) { .menu li a { font-size: clamp(2.2rem, 11vw, 3.4rem); } .menu-logo { width: 46vw; } }
+
+main > section { scroll-margin-top: var(--nav-bottom, 84px); }
