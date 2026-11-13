@@ -91,7 +91,7 @@
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = rect.width; H = rect.height;
       canvas.width = W * dpr; canvas.height = H * dpr;
-      const step = W < 420 ? 5 : 6.5;
+      const step = W < 420 ? 4 : 5;
       const cols = Math.floor(W / step), rows = Math.floor(H / step);
       const off = document.createElement("canvas"); off.width = cols; off.height = rows;
       const o = off.getContext("2d", { willReadFrequently: true });
@@ -103,7 +103,7 @@
         const i = (y * cols + x) * 4, a = data[i + 3];
         if (a < 128) continue;
         const lum = data[i] / 255;
-        const r = (step / 2) * Math.sqrt(lum) * 1.05;
+        const r = (step / 2) * Math.sqrt(lum) * 1.1;
         if (r < 0.45) continue;
         const hx = (x + 0.5) * step, hy = (y + 0.5) * step;
         parts.push({ hx, hy, x: assembled ? hx : Math.random() * W, y: assembled ? hy : H + Math.random() * H * 0.6, vx: 0, vy: 0, r, rx: Math.random() - 0.5, ry: Math.random() });
@@ -154,7 +154,7 @@
   }
 
   // ---------- reveal targets ----------
-  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
+  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }

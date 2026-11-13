@@ -325,3 +325,22 @@ html.lenis { scroll-behavior: auto; }
 .no-motion .illus .am-glow, .no-motion .illus .sh-pkg, .no-motion .illus .sh-lit, .no-motion .illus .am-mail { opacity: 0 !important; }
 @media (prefers-reduced-motion: reduce) { .illus * { animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; } .illus .am-glow, .illus .sh-pkg, .illus .sh-lit, .illus .am-mail { opacity: 0 !important; } }
 .perspectives .illus-cap p { margin: 0; max-width: none; text-align: left; color: var(--accent); }
+
+/* ===== freelance ===== */
+.fl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; margin-top: 60px; }
+.fl-card { border: 1px solid var(--line); border-radius: 14px; background: var(--bg); padding: 28px 24px 26px; display: flex; flex-direction: column; transition: border-color .4s, transform .5s cubic-bezier(.19, 1, .22, 1); }
+.fl-card:hover { border-color: var(--accent); transform: translateY(-6px); }
+.fl-card h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 3vw, 2.6rem); line-height: 1.05; margin: 12px 0 4px; }
+.fl-sub { color: var(--accent); font-size: .9rem; }
+.fl-desc { color: #cfcac0; margin: 14px 0 20px; font-size: .95rem; }
+.fl-price { border-top: 1px solid var(--line); margin-bottom: 4px; }
+.fl-price li { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.fl-price li span small { display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: var(--dim); margin-top: 2px; }
+.fl-price li b { font-family: var(--serif); font-weight: 400; font-size: 1.25rem; white-space: nowrap; text-align: right; }
+.fl-card .tags { margin: 18px 0; }
+.fl-card .btn { margin-top: auto; align-self: flex-start; }
+.fl-note { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 30px; margin-top: 60px; padding-top: 34px; border-top: 1px solid var(--line); }
+.fl-note b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.1; color: var(--fg); }
+.fl-note span { color: var(--dim); font-size: .9rem; }
+.fl-foot { margin-top: 36px; text-transform: none; letter-spacing: .04em; max-width: 70ch; }
+@media (max-width: 860px) { .fl-price li { flex-direction: column; gap: 2px; } .fl-price li b { text-align: left; } }
