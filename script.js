@@ -144,96 +144,72 @@ function scrollingNamediv() {
 
   })
 }
-gsap.from(".skills-icons img", {
-  scale: 0,
-  opacity: 0,
-  duration: 0.8,
-  stagger: 0.1,
-  ease: "back.out(1.7)"
-});
-
-function disableContextMenu() {
-  // Disable right-click
-  document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-  });
-
-  // Disable most dev tool shortcuts (Windows & Mac)
-  document.addEventListener("keydown", (e) => {
-    const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
-
-    // Common devtool keys
-    const key = e.key.toLowerCase();
-
-    if (
-      key === "f12" ||
-      (e.ctrlKey && e.shiftKey && ["i", "j", "c"].includes(key)) || // Windows: Ctrl+Shift+I/J/C
-      (e.ctrlKey && ["u", "s"].includes(key)) ||                   // Ctrl+U/S
-      (isMac && e.metaKey && e.altKey && ["i", "j", "c"].includes(key)) // Mac: Cmd+Opt+I/J/C
-    ) {
-      e.preventDefault();
-      return false;
+function skillsAnimation() {
+  gsap.from(".skill-card img", {
+    scale: 0,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.1,
+    ease: "back.out(1.7)",
+    scrollTrigger: {
+      trigger: "#skills",
+      scroller: "main",
+      start: "top 80%"
     }
   });
-
 }
 
-var page5 = document.querySelector(".page7")
-var cursor = document.querySelector(".cursor")
+function hoverEffects() {
+  const contact = document.querySelector(".page7");
+  const cursor = document.querySelector(".cursor");
 
-page5.addEventListener("mouseenter",function(){
-  cursor.style.opacity=1
-});
-page5.addEventListener("mousemove",function(dets){
-    cursor.style.left=dets.x+"px"
-    cursor.style.top=dets.y+"px"
-    
-});
-
-page5.addEventListener("mouseleave",function(){
-   cursor.style.opacity=0
-});
-
-
-var elem =document.querySelectorAll("#elem")
-
-elem.forEach(function(val){
-   
-    val.addEventListener("mouseenter",function(){
-            val.childNodes[5].style.opacity=1
+  if (contact && cursor) {
+    contact.addEventListener("mouseenter", () => { cursor.style.opacity = 1; });
+    contact.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
     });
+    contact.addEventListener("mouseleave", () => { cursor.style.opacity = 0; });
+  }
 
-    val.addEventListener("mouseleave",function(){
-        val.childNodes[5].style.opacity=0
-});
+  document.querySelectorAll(".elem").forEach((val) => {
+    const img = val.querySelector("img");
+    if (!img) return;
+    val.addEventListener("mouseenter", () => { img.style.opacity = 1; });
+    val.addEventListener("mouseleave", () => { img.style.opacity = 0; });
+    val.addEventListener("mousemove", (e) => { img.style.left = e.clientX + "px"; });
+  });
+}
 
-val.addEventListener("mousemove",function(dets){
-    val.childNodes[5].style.left=dets.x+"px"
-});
-})
+function setupContactForm() {
+  const form = document.getElementById("enquiry-form");
+  const status = document.getElementById("form-status");
+  const button = form.querySelector("button[type=submit]");
 
-// EmailJS init
-emailjs.init("gDOm08i95Bwjfs1s_");
+  // EmailJS public key (safe to expose; restrict allowed domains in the EmailJS dashboard)
+  emailjs.init("gDOm08i95Bwjfs1s_");
 
-// Form Submit Handler
-document.getElementById("enquiry-form").addEventListener("submit", function(e){
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+    button.disabled = true;
+    status.innerText = "Sending...";
 
-    emailjs.sendForm("service_ogydzk3", "template_5ylpwlc", this)
-    .then(() => {
-        document.getElementById("form-status").innerText = "Message sent successfully!";
-        this.reset();
-    })
-    .catch((error) => {
-        document.getElementById("form-status").innerText = "Failed to send message. Try again!";
+    emailjs.sendForm("service_ogydzk3", "template_5ylpwlc", form)
+      .then(() => {
+        status.innerText = "Message sent successfully!";
+        form.reset();
+      })
+      .catch((error) => {
+        status.innerText = "Failed to send message. Try again!";
         console.error("Error:", error);
-    });
-});
+      })
+      .finally(() => { button.disabled = false; });
+  });
+}
 
-
-
-
-locomotiveScrollTriggerSetup()
-rotatingArrow()
-scrollingNamediv()
-disableContextMenu()
+locomotiveScrollTriggerSetup();
+rotatingArrow();
+scrollingNamediv();
+skillsAnimation();
+hoverEffects();
+setupContactForm();

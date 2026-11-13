@@ -1051,7 +1051,7 @@ nav svg {
     transition: color ease-in 0.4s;
 }
 
-#sliding-div {
+.sliding-div {
     position: absolute;
     left: 0;
     top: 0;
@@ -1065,7 +1065,7 @@ nav svg {
 }
 
 
-#artworks a:hover #sliding-div {
+#artworks a:hover .sliding-div {
     width: 100%;
 }
 
@@ -1168,7 +1168,7 @@ nav svg {
         transition: color ease-in 0.4s;
     }
 
-    #sliding-div {
+    .sliding-div {
         position: absolute;
         left: 0;
         top: 0;
@@ -1182,7 +1182,7 @@ nav svg {
     }
 
 
-    #artworks a:hover #sliding-div {
+    #artworks a:hover .sliding-div {
         width: 100%;
     }
 
