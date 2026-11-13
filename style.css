@@ -454,3 +454,13 @@ body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
     .hero > .bg-logo, body[data-portrait] .hero > .bg-logo { left: 27%; width: min(42vw, 600px); height: min(42vw, 600px); }
     .hero > .bg-logo img { opacity: .16; }
 }
+
+/* Desktop / laptop: logo is static and sits behind the name (tablet & phone keep the animated version) */
+@media (min-width: 961px) and (min-height: 561px) {
+    .hero > .bg-logo, body[data-portrait] .hero > .bg-logo { left: max(var(--pad), calc((100vw - 1240px) / 2 - 40px)); right: auto; bottom: auto; margin: 0;
+        width: min(36vw, 500px); height: min(36vw, 500px); top: calc(41% - min(18vw, 250px));
+        -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 35%, transparent 74%); mask-image: radial-gradient(circle at 50% 50%, #000 35%, transparent 74%); }
+    .hero > .bg-logo::before { display: none; }
+    .hero > .bg-logo img { animation: none !important; transform: none; opacity: .13; }
+}
+@media (min-width: 961px) and (min-height: 561px) { .hero > .bg-logo, body[data-portrait] .hero > .bg-logo { display: none; } }

@@ -230,8 +230,10 @@
   });
 
   // faded hero logo: drifts up as you scroll away, and leans toward the mouse
-  gsap.to(".hero > .bg-logo", { yPercent: -25, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-  if (window.matchMedia("(hover: hover)").matches) {
+  // desktop/laptop: the logo stays completely static; tablets and phones keep the drifting version
+  const staticLogo = window.matchMedia("(min-width: 961px) and (min-height: 561px)").matches;
+  if (!staticLogo) gsap.to(".hero > .bg-logo", { yPercent: -25, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  if (!staticLogo && window.matchMedia("(hover: hover)").matches) {
     const lx = gsap.quickTo(".hero > .bg-logo", "x", { duration: 1.6, ease: "power3" }), ly = gsap.quickTo(".hero > .bg-logo", "y", { duration: 1.6, ease: "power3" });
     window.addEventListener("mousemove", (e) => { lx((e.clientX / innerWidth - 0.5) * -40); ly((e.clientY / innerHeight - 0.5) * -28); }, { passive: true });
   }
