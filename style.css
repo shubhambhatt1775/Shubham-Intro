@@ -416,3 +416,15 @@ main > section { scroll-margin-top: var(--nav-bottom, 84px); }
 }
 body[data-portrait="photo"] .photo-img { filter: none; }
 @media (min-width: 961px) { .hero-bottom span:last-child { margin-right: 150px; } }
+
+/* ===== Desktop hero: keep content in a centred container + fill the empty background ===== */
+@media (min-width: 961px) and (min-height: 561px) {
+    body[data-portrait="photo"] .hero { padding-left: max(var(--pad), calc((100vw - 1240px) / 2)); padding-right: max(var(--pad), calc((100vw - 1240px) / 2)); position: relative; }
+    body[data-portrait="photo"] .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+        background-image: radial-gradient(rgba(241, 238, 232, .16) 1px, transparent 1.4px); background-size: 28px 28px;
+        -webkit-mask-image: radial-gradient(ellipse 60% 70% at 38% 55%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse 60% 70% at 38% 55%, #000 0%, transparent 72%); }
+    body[data-portrait="photo"] .hero > * { position: relative; z-index: 1; }
+    body[data-portrait="photo"] .hero-main { z-index: 2; }
+    body[data-portrait="photo"] .hero h1 { font-size: clamp(4rem, min(10vw, 18vh), 11.5rem); }
+    body[data-portrait="photo"] .hero .hero-main::before { content: ""; display: block; width: 56px; height: 2px; background: var(--accent); margin-bottom: clamp(16px, 3vh, 30px); }
+}
