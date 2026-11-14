@@ -174,7 +174,7 @@
   }));
 
   // ---------- reveal targets ----------
-  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .ct-card, #enquiry-form, h2, .sub")
+  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .edu-card, .ct-card, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
@@ -269,6 +269,10 @@
   $$(".tl").forEach((row) => {
     gsap.from($(".yr", row), { x: -30, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: row, start: "top 85%" } });
   });
+
+  // education timeline: the line draws as you scroll down it
+  gsap.fromTo(".edu-line span", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: ".edu-list", start: "top 70%", end: "bottom 60%", scrub: true } });
+  $$(".edu-node").forEach((n) => gsap.from(n, { scale: 0, duration: .6, ease: "back.out(2)", scrollTrigger: { trigger: n, start: "top 85%" } }));
 
   // counters
   $$("[data-count]").forEach((n) => {
