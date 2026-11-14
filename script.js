@@ -168,8 +168,13 @@
     }, { passive: true });
   }
 
+  // ct-card hover glow follows the pointer
+  $$(".ct-card").forEach((c) => c.addEventListener("pointermove", (e) => {
+    const r = c.getBoundingClientRect(); c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }));
+
   // ---------- reveal targets ----------
-  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .links li, #enquiry-form, h2, .sub")
+  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .ct-card, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
