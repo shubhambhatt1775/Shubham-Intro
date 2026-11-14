@@ -496,3 +496,13 @@ body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
 .no-motion .tk-track, .no-motion .tk-pulse { animation: none; }
 .no-motion .tk-row { overflow-x: auto; }
 @media (prefers-reduced-motion: reduce) { .tk-track, .tk-pulse { animation: none; } .tk-row { overflow-x: auto; } }
+
+/* Upwork profile link */
+.fl-upwork { display: flex; align-items: center; gap: 18px; margin-top: 40px; padding: 20px 26px; border: 1px solid rgba(20, 168, 0, .45); background: rgba(20, 168, 0, .07); border-radius: 16px; transition: transform .4s cubic-bezier(.19,1,.22,1), background .3s, border-color .3s; }
+.fl-upwork:hover { transform: translateY(-4px); background: rgba(20, 168, 0, .14); border-color: #14a800; }
+.up-logo { flex: none; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: #14a800; color: #fff; font-weight: 700; font-size: 1.1rem; }
+.up-t { flex: 1; min-width: 0; }
+.up-t b { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.15; }
+.up-t small { color: var(--dim); }
+.up-arrow { font-size: 1.6rem; color: #14a800; transition: transform .3s; }
+.fl-upwork:hover .up-arrow { transform: translate(4px, -4px); }
