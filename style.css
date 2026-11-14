@@ -630,3 +630,5 @@ body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
 @media (max-width: 860px) { .hobby { margin-top: 80px; padding-top: 50px; } }
 .no-motion .hb-card * { animation: none !important; }
 @media (prefers-reduced-motion: reduce) { .hb-card * { animation: none !important; } }
+
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
