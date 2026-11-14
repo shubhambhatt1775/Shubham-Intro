@@ -601,3 +601,32 @@ body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
 }
 .no-motion .edu-final .edu-node { animation: none; }
 @media (prefers-reduced-motion: reduce) { .edu-final .edu-node { animation: none; } }
+
+/* ===== hobbies ===== */
+.hobby { margin-top: 110px; padding-top: 70px; border-top: 1px solid var(--line); }
+.hobby .edu-h { margin-bottom: 18px; }
+.hb-sub { margin-bottom: 44px; }
+.hb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
+.hb-card { position: relative; overflow: hidden; padding: 28px 24px 26px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01)); transition: transform .5s cubic-bezier(.19,1,.22,1), border-color .3s, background .3s; }
+.hb-card::after { content: ""; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(255,106,43,.28), transparent 70%); opacity: 0; transition: opacity .4s; }
+.hb-card:hover { transform: translateY(-8px); border-color: rgba(255,106,43,.6); }
+.hb-card:hover::after { opacity: 1; }
+.hb-n { position: absolute; right: 20px; top: 18px; color: var(--dim); }
+.hb-ic { display: block; width: 58px; height: 58px; margin-bottom: 22px; color: var(--accent); }
+.hb-ic svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.hb-card h4 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 2.6vw, 2.4rem); line-height: 1.05; margin-bottom: 10px; }
+.hb-card p { color: #cfcac0; font-size: .96rem; }
+.hb-tag { display: inline-block; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); width: 100%; }
+.hb-lens { transform-box: fill-box; transform-origin: center; }
+.hb-card:hover .hb-lens { animation: hb-focus 1.2s ease-in-out infinite; }
+.hb-card:hover .hb-line { stroke-dasharray: 40; animation: hb-write 1.4s ease-out infinite; }
+.hb-card:hover .hb-pen { transform-box: fill-box; transform-origin: 20% 80%; animation: hb-wiggle 1s ease-in-out infinite; }
+.hb-needle { transform-box: fill-box; transform-origin: center; }
+.hb-card:hover .hb-needle { animation: hb-spin 2.2s ease-in-out infinite; }
+@keyframes hb-focus { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
+@keyframes hb-write { from { stroke-dashoffset: 40; } to { stroke-dashoffset: 0; } }
+@keyframes hb-wiggle { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-8deg); } }
+@keyframes hb-spin { 0% { transform: rotate(0); } 50% { transform: rotate(60deg); } 100% { transform: rotate(0); } }
+@media (max-width: 860px) { .hobby { margin-top: 80px; padding-top: 50px; } }
+.no-motion .hb-card * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .hb-card * { animation: none !important; } }

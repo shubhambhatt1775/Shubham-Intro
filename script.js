@@ -174,7 +174,7 @@
   }));
 
   // ---------- reveal targets ----------
-  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .edu-card, .ct-card, #enquiry-form, h2, .sub")
+  $$(".proof-row > div, .about-grid > *, .perspectives, .case, .more a, .fl-card, .fl-note > div, .expertise, .impact-big, .impact-side > div, .tl, .edu-card, .hb-card, .ct-card, #enquiry-form, h2, .sub")
     .forEach((el) => el.classList.add("rv"));
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
