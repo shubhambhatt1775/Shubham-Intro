@@ -506,3 +506,14 @@ body[data-portrait] .hero > .bg-logo { position: absolute; z-index: 0; }
 .up-t small { color: var(--dim); }
 .up-arrow { font-size: 1.6rem; color: #14a800; transition: transform .3s; }
 .fl-upwork:hover .up-arrow { transform: translate(4px, -4px); }
+
+/* WhatsApp floating button */
+.wa-fab { position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 55; display: flex; align-items: center; gap: 0; height: 58px; padding: 0 15px; border-radius: 99px; background: #25d366; color: #fff; box-shadow: 0 10px 30px rgba(37, 211, 102, .35), 0 0 0 0 rgba(37, 211, 102, .5); animation: wa-ping 2.6s ease-out infinite; transition: transform .3s; }
+.wa-fab svg { width: 28px; height: 28px; flex: none; }
+.wa-label { max-width: 0; overflow: hidden; white-space: nowrap; font-weight: 600; font-size: .92rem; transition: max-width .45s cubic-bezier(.19,1,.22,1), margin .3s; }
+.wa-fab:hover { transform: translateY(-3px); }
+.wa-fab:hover .wa-label, .wa-fab:focus-visible .wa-label { max-width: 170px; margin-right: 10px; }
+@keyframes wa-ping { 0% { box-shadow: 0 10px 30px rgba(37,211,102,.35), 0 0 0 0 rgba(37,211,102,.5); } 70%, 100% { box-shadow: 0 10px 30px rgba(37,211,102,.35), 0 0 0 18px rgba(37,211,102,0); } }
+@media (hover: none) { .wa-label { display: none; } }
+@media (prefers-reduced-motion: reduce) { .wa-fab { animation: none; } }
+.no-motion .wa-fab { animation: none; }
