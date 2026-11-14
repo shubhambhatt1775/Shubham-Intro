@@ -8,23 +8,11 @@
   try { if (new URLSearchParams(location.search).get("portrait") === "dots") pmode = "dots"; } catch (e) {}
   document.body.dataset.portrait = pmode;
 
-  // ---------- motion preference ----------
+  // ---------- motion preference (follows the visitor's system setting) ----------
   const reduceOS = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let motion = !reduceOS;
-  try { const s = localStorage.getItem("motion"); if (s !== null) motion = s === "on"; } catch (e) {}
   if (!hasGsap) motion = false;
   document.body.classList.toggle("no-motion", !motion);
-
-  const toggle = $("#motionToggle"), state = $("#motionState");
-  toggle.setAttribute("aria-pressed", motion);
-  state.textContent = motion ? "on" : "off";
-  $("#menuMotionState").textContent = motion ? "on" : "off";
-  const flipMotion = () => {
-    try { localStorage.setItem("motion", motion ? "off" : "on"); } catch (e) {}
-    location.reload();
-  };
-  toggle.addEventListener("click", flipMotion);
-  $("#menuMotion").addEventListener("click", flipMotion);
 
   // ---------- navbar offset: sections align just below the floating navbar ----------
   const navEl = $(".navigation");
@@ -186,39 +174,7 @@
 
   if (!motion) { showStaticCounts(); $$(".rv").forEach((e) => e.classList.remove("rv")); return; }
 
-  // ---------- section snapping: the next section's top meets the bottom of the navbar ----------
   const sections = $$("main > section");
-  const touch = window.matchMedia("(hover: none)").matches;
-  let snapTimer = null, snapping = false, lastY = window.scrollY, dir = 1;
-  function snapPoints() {
-    const maxY = document.documentElement.scrollHeight - innerHeight;
-    return sections.map((s, i) => i === 0 ? 0 : Math.min(maxY, Math.max(0, Math.round(s.getBoundingClientRect().top + window.scrollY - navBottom()))));
-  }
-  function doSnap() {
-    if (!lenis || snapping || menu.classList.contains("open")) return;
-    const y = window.scrollY;
-    const thr = innerHeight * (touch ? 0.32 : 0.55);          // strong pull: within about half a screen
-    const pts = snapPoints();
-    // prefer the edge in the direction you were scrolling, otherwise the closest edge
-    let best = null, bestD = Infinity;
-    pts.forEach((p) => {
-      const d = Math.abs(p - y);
-      const ahead = dir > 0 ? p >= y - 3 : p <= y + 3;
-      const score = ahead ? d : d + thr * 0.6;                  // edges behind you must be much closer
-      if (score < bestD) { bestD = score; best = p; }
-    });
-    if (best === null || Math.abs(best - y) < 3 || Math.abs(best - y) > thr) return;
-    snapping = true;
-    lenis.scrollTo(best, { duration: 0.8, easing: (t) => 1 - Math.pow(1 - t, 4), onComplete: () => { snapping = false; } });
-    setTimeout(() => { snapping = false; }, 1300);
-  }
-  if (lenis) lenis.on("scroll", () => {
-    const y = window.scrollY;
-    if (Math.abs(y - lastY) > 1) dir = y > lastY ? 1 : -1;
-    lastY = y;
-    clearTimeout(snapTimer);
-    if (!snapping) snapTimer = setTimeout(doSnap, 110);
-  });
 
   // ---------- section exit effect: each section settles back as the next one slides up ----------
   sections.forEach((s, i) => {
