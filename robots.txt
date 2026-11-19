@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shubhambhatt1775.github.io/Shubham-Intro/sitemap.xml
+Sitemap: https://shubhambhatt1775.in/sitemap.xml

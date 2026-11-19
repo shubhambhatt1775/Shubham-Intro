@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://shubhambhatt1775.github.io/Shubham-Intro/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <loc>https://shubhambhatt1775.in/</loc>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <image:image><image:loc>https://shubhambhatt1775.github.io/Shubham-Intro/images/og-image.jpg</image:loc><image:title>Shubham Bhatt, Full Stack Developer</image:title></image:image>
-    <image:image><image:loc>https://shubhambhatt1775.github.io/Shubham-Intro/images/portrait-photo.webp</image:loc><image:title>Portrait of Shubham Bhatt</image:title></image:image>
+    <image:image><image:loc>https://shubhambhatt1775.in/images/og-image.jpg</image:loc><image:title>Shubham Bhatt, Full Stack Developer</image:title></image:image>
+    <image:image><image:loc>https://shubhambhatt1775.in/images/portrait-photo.webp</image:loc><image:title>Portrait of Shubham Bhatt</image:title></image:image>
   </url>
 </urlset>
